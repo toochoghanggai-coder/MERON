@@ -35,7 +35,7 @@
 
   <!-- Hero -->
   <section class="hero">
-    <div class="container hero__inner">
+    <div class="container hero__inner hero__inner--single">
       <div class="hero__content">
         <p class="badge">中古タイヤの買取・販売・取付・輸出</p>
         <h1 class="hero__title">
@@ -45,51 +45,6 @@
           買取 → 出品（ヤフオク）→ 海外輸出 → 店頭取付/販売まで一貫対応。<br />
           法人・個人どちらもご相談ください。
         </p>
-
-        <div class="hero__cta">
-          <a class="btn" href="#contact">無料で相談する</a>
-          <a class="btn btn--ghost" href="#services">事業内容を見る</a>
-        </div>
-
-        <div class="hero__stats">
-          <div class="stat">
-            <div class="stat__num">6</div>
-            <div class="stat__label">従業員数</div>
-          </div>
-          <div class="stat">
-            <div class="stat__num">¥5,000,000</div>
-            <div class="stat__label">資本金</div>
-          </div>
-          <div class="stat">
-            <div class="stat__num">埼玉</div>
-            <div class="stat__label">拠点</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero__visual">
-        <!-- 画像があるなら差し替え：assets/img/hero.jpg -->
-        <div class="heroCard">
-          <div class="heroCard__top">
-            <div class="pill">買取</div>
-            <div class="pill">販売</div>
-            <div class="pill">取付</div>
-            <div class="pill">輸出</div>
-          </div>
-          <div class="heroCard__main">
-            <div class="heroCard__title">ワンストップ対応</div>
-            <p class="heroCard__text">
-              状態確認・撮影・出品・発送・輸出まで。<br />
-              店頭での取付/販売もスムーズに。
-            </p>
-            <ul class="checkList">
-              <li>迅速な査定・買取</li>
-              <li>オンライン販売（ヤフオク等）</li>
-              <li>海外輸出の実務対応</li>
-              <li>店頭取付・店頭販売</li>
-            </ul>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -109,26 +64,32 @@
           <h3 class="card__title">基本情報</h3>
           <dl class="dl">
             <div class="dl__row">
-              <dt>会社名</dt><dd>株式会社IREEDUI</dd>
+              <dt>会社名</dt>
+              <dd>株式会社IREEDUI</dd>
             </div>
             <div class="dl__row">
-              <dt>代表者</dt><dd>高原 雪</dd>
+              <dt>代表者</dt>
+              <dd>高原 雪</dd>
             </div>
             <div class="dl__row">
-              <dt>所在地</dt><dd>埼玉県鴻巣市XX999-1</dd>
+              <dt>所在地</dt>
+              <dd>埼玉県鴻巣市XX999-1</dd>
             </div>
             <div class="dl__row">
-              <dt>設立</dt><dd>20215/01/01</dd>
+              <dt>設立</dt>
+              <dd>20215/01/01</dd>
             </div>
             <div class="dl__row">
-              <dt>資本金</dt><dd>500万</dd>
+              <dt>資本金</dt>
+              <dd>500万</dd>
             </div>
             <div class="dl__row">
-              <dt>従業員数</dt><dd>6人</dd>
+              <dt>従業員数</dt>
+              <dd>6人</dd>
             </div>
           </dl>
           <p class="note">
-            ※設立年月日は原文のまま記載しています（後で正しい表記に整えられます）。
+            ※設立年月日は原文のまま記載しています。公開前に正しい日付をご確認ください。
           </p>
         </div>
 
@@ -273,7 +234,7 @@
   <!-- Contact -->
   <section class="section" id="contact">
     <div class="container">
-      <div class="cta">
+      <div class="cta cta--simple">
         <div class="cta__text">
           <h2>お問い合わせ</h2>
           <p>買取・購入・取付・輸出のご相談はこちらから。</p>
@@ -283,27 +244,6 @@
             <li>代表者：高原 雪</li>
           </ul>
         </div>
-
-        <form class="form" id="contactForm">
-          <div class="form__row">
-            <label>お名前<span class="req">*</span>
-              <input name="name" required placeholder="例）山田 太郎" />
-            </label>
-          </div>
-          <div class="form__row">
-            <label>メールアドレス<span class="req">*</span>
-              <input type="email" name="email" required placeholder="例）taro@example.com" />
-            </label>
-          </div>
-          <div class="form__row">
-            <label>お問い合わせ内容<span class="req">*</span>
-              <textarea name="message" rows="5" required placeholder="例）中古タイヤ4本の買取希望。サイズは…"></textarea>
-            </label>
-          </div>
-          <button class="btn" type="submit">送信内容を確認（デモ）</button>
-          <p class="form__note" id="formNote" role="status" aria-live="polite"></p>
-          <p class="note">※このサンプルは「送信」ではなく、デモ表示のみです（メール送信やフォーム連携は別途）。</p>
-        </form>
       </div>
     </div>
   </section>
@@ -319,7 +259,7 @@
 
   <script src="./js/main.js"></script>
 
-  <!-- （任意）構造化データ：会社情報の雛形 -->
+  <!-- 構造化データ：会社情報の雛形 -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
