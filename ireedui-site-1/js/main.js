@@ -1,4 +1,3 @@
-// Mobile nav toggle
 const navToggle = document.getElementById("navToggle");
 const nav = document.getElementById("nav");
 
@@ -8,18 +7,15 @@ if (navToggle && nav) {
     navToggle.setAttribute("aria-expanded", String(isOpen));
   });
 
-  // Close menu when clicking a link on mobile
-  nav.querySelectorAll("a").forEach((a) => {
-    a.addEventListener("click", () => {
+  nav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
       nav.classList.remove("is-open");
       navToggle.setAttribute("aria-expanded", "false");
     });
   });
 
-  // Close menu when clicking outside
   document.addEventListener("click", (e) => {
     const target = e.target;
-
     if (!nav.contains(target) && !navToggle.contains(target)) {
       nav.classList.remove("is-open");
       navToggle.setAttribute("aria-expanded", "false");
@@ -27,9 +23,7 @@ if (navToggle && nav) {
   });
 }
 
-// Footer year
 const year = document.getElementById("year");
-
 if (year) {
-  year.textContent = String(new Date().getFullYear());
+  year.textContent = new Date().getFullYear();
 }
