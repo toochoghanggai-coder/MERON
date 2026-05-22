@@ -270,13 +270,6 @@ img {
   margin-bottom: 24px;
 }
 
-.sectionLabel__jp {
-  display: block;
-  color: #ff3b42;
-  font-size: 34px;
-  font-weight: 900;
-}
-
 .sectionLabel__en {
   display: block;
   margin-top: 6px;
@@ -360,13 +353,14 @@ img {
 
 .serviceCards {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 18px;
+  grid-template-columns: repeat(4, minmax(240px, 280px));
+  gap: 24px;
+  justify-content: center;
 }
 
 .serviceCard {
   position: relative;
-  min-height: 320px;
+  min-height: 360px;
   overflow: hidden;
   border-radius: var(--radius);
   border: 1px solid rgba(255, 255, 255, .14);
@@ -381,18 +375,21 @@ img {
   background:
     linear-gradient(
       180deg,
-      rgba(4, 10, 20, .18),
-      rgba(4, 10, 20, .82)
+      rgba(4, 10, 20, .78),
+      rgba(4, 10, 20, .46),
+      rgba(4, 10, 20, .78)
     );
 }
 
 .serviceCard__body {
   position: absolute;
+  top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: auto;
   z-index: 1;
-  padding: 24px 20px;
+  padding: 26px 22px;
+  text-align: left;
 }
 
 .serviceCard h3 {
@@ -427,52 +424,6 @@ img {
   background-image: url("../assets/img/service-store.png");
 }
 
-/* ==============================
-   Flow
-============================== */
-.flow {
-  padding: 80px 0;
-  background:
-    linear-gradient(rgba(6, 13, 26, .9), rgba(6, 13, 26, .9)),
-    radial-gradient(circle at center, #102242 0%, #071120 60%);
-}
-
-.flowSteps {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
-}
-
-.flowStep {
-  background: rgba(255, 255, 255, .04);
-  border: 1px solid rgba(255, 255, 255, .12);
-  border-radius: var(--radius);
-  padding: 28px 22px;
-  text-align: left;
-}
-
-.flowStep__num {
-  width: 52px;
-  height: 52px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: #2359b8;
-  font-weight: 900;
-  font-size: 20px;
-  margin-bottom: 18px;
-}
-
-.flowStep h3 {
-  margin: 0 0 10px;
-  font-size: 24px;
-}
-
-.flowStep p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 15px;
-}
 
 /* ==============================
    Contact / Access
@@ -511,6 +462,7 @@ img {
   align-items: stretch;
 }
 
+/* お問い合わせカード・アクセスカード共通 */
 .contactCard,
 .accessCard {
   background: rgba(8, 18, 36, .68);
@@ -519,6 +471,12 @@ img {
   padding: 32px;
   box-shadow: var(--shadow);
   backdrop-filter: blur(4px);
+}
+
+/* アクセスカードは中の地図エリアを縦に伸ばしやすくする */
+.accessCard {
+  display: flex;
+  flex-direction: column;
 }
 
 .contactCard__title,
@@ -604,9 +562,11 @@ img {
   font-weight: 800;
 }
 
+/* Google Map風カード */
 .mapPreview {
   position: relative;
-  min-height: 260px;
+  min-height: 420px;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -628,8 +588,8 @@ img {
   inset: 0;
   opacity: .16;
   background-image:
-    linear-gradient(rgba(255,255,255,.18) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.18) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, .18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .18) 1px, transparent 1px);
   background-size: 34px 34px;
 }
 
@@ -672,6 +632,11 @@ img {
   font-size: 13px;
 }
 
+#contact,
+#access {
+  scroll-margin-top: 110px;
+}
+
 /* ==============================
    Footer
 ============================== */
@@ -707,7 +672,16 @@ img {
 /* ==============================
    Responsive
 ============================== */
+@media (max-width: 1100px) {
+  .serviceCards {
+    grid-template-columns: repeat(2, minmax(260px, 1fr));
+    justify-content: center;
+  }
 
+  .flowSteps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
 @media (max-width: 900px) {
   .about__grid {
@@ -719,7 +693,7 @@ img {
   }
 
   .serviceCards {
-    grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(240px, 1fr));
   }
 
   .navToggle {
@@ -790,7 +764,6 @@ img {
   }
 
   .sectionHead h2,
-  .sectionLabel__jp,
   .about__title {
     font-size: 32px;
   }
@@ -810,11 +783,6 @@ img {
   .companyTable__row {
     grid-template-columns: 1fr;
     gap: 6px;
-  }
-
-  .contactCard__title,
-  .accessCard__title {
-    font-size: 30px;
   }
 
   .contactLink {
