@@ -439,66 +439,32 @@ img {
 }
 
 
+
 /* ==============================
-   Contact / Access / Recruit
+   Contact / Recruit
 ============================== */
-.contact {
+.contactRecruit {
   position: relative;
-  padding: 90px 0;
-  background:
-    url("../assets/img/contact-bg.png") center / cover no-repeat;
+  padding: 80px 0 44px;
+  background: var(--bg);
 }
 
-.contact__overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(5, 12, 22, .9),
-      rgba(5, 12, 22, .68)
-    );
-}
-
-.contact .container {
-  position: relative;
-  z-index: 1;
-}
-
-
-/* 上段：アクセスマップ2枚 */
-.accessGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px;
-  align-items: stretch;
-  margin-bottom: 28px;
-}
-
-/* 下段：お問い合わせ・求人情報 */
-.contactRecruitGrid {
+.contactRecruit__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 28px;
   align-items: stretch;
 }
 
-/* カード共通 */
 .contactCard,
-.accessCard,
-.recruitCard {
+.recruitCard,
+.accessCard {
   background: rgba(8, 18, 36, .68);
   border: 1px solid rgba(255, 255, 255, .12);
   border-radius: var(--radius);
   padding: 32px;
   box-shadow: var(--shadow);
   backdrop-filter: blur(4px);
-}
-
-/* アクセスカードは中の地図エリアを伸ばしやすくする */
-.accessCard {
-  display: flex;
-  flex-direction: column;
 }
 
 .contactCard__lead,
@@ -565,31 +531,325 @@ img {
   word-break: break-all;
 }
 
-.accessInfo {
-  margin-bottom: 22px;
+.contactCard {
+  padding: 28px;
+  border-radius: 26px;
+  background: #151515;
+  color: #fff;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
 }
 
-.accessInfo__postcode {
-  margin: 0 0 6px;
-  color: rgba(255, 255, 255, .72);
-  font-size: 15px;
+.contactCard__head {
+  margin-bottom: 20px;
+}
+
+.contactCard__label {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: #e53935;
+  font-weight: 700;
+}
+
+.contactCard__head h2 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.contactCard__head p {
+  margin: 0;
+  color: #d6d6d6;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.contactCard__boxes {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.contactCard__box {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  text-decoration: none;
+}
+
+.contactCard__box:hover {
+  transform: translateY(-2px);
+  border-color: rgba(229, 57, 53, 0.55);
+}
+
+.contactCard__icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  background: rgba(229, 57, 53, 0.16);
+  font-size: 20px;
+}
+
+.contactCard__body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.contactCard__boxLabel {
+  font-size: 12px;
+  color: #bdbdbd;
+  letter-spacing: 0.06em;
+}
+
+.contactCard__value {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.contactCard__box--accent {
+  background: linear-gradient(135deg, #e53935, #991313);
+  border: none;
+}
+
+.contactCard__box--accent .contactCard__icon {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.contactCard__box--accent .contactCard__boxLabel,
+.contactCard__box--accent .contactCard__value {
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .contactCard {
+    padding: 22px;
+  }
+
+  .contactCard__head h2 {
+    font-size: 24px;
+  }
+}
+
+.recruitCard {
+  padding: 28px;
+  border-radius: 26px;
+  background: #151515;
+  color: #fff;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+}
+
+.recruitCard__head {
+  margin-bottom: 20px;
+}
+
+.recruitCard__label {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: #e53935;
+  font-weight: 700;
+}
+
+.recruitCard__head h2 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.recruitCard__head p {
+  margin: 0;
+  color: #d6d6d6;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.recruitCard__boxes {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.recruitCard__box {
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.recruitCard__box h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.recruitCard__box ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.recruitCard__box li {
+  position: relative;
+  padding-left: 16px;
+  margin-bottom: 7px;
+  color: #dcdcdc;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.recruitCard__box li:last-child {
+  margin-bottom: 0;
+}
+
+.recruitCard__box li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #e53935;
+}
+
+.recruitCard__box p {
+  margin: 0;
+  color: #dcdcdc;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.recruitCard__box--accent {
+  background: linear-gradient(135deg, #e53935, #991313);
+  border: none;
+}
+
+.recruitCard__box--accent p {
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .recruitCard {
+    padding: 22px;
+  }
+
+  .recruitCard__head h2 {
+    font-size: 24px;
+  }
+}
+
+/* ==============================
+   Access
+============================== */
+.accessSection {
+  position: relative;
+  overflow: hidden;
+  padding: 80px 0;
+  background:
+    linear-gradient(135deg, rgba(229, 57, 53, 0.18), transparent 34%),
+    linear-gradient(180deg, #34383d 0%, #24272c 100%);
+}
+
+.accessSection::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(28deg, transparent 0 42%, rgba(255, 255, 255, 0.16) 42% 44%, transparent 44% 100%),
+    linear-gradient(115deg, transparent 0 52%, rgba(255, 255, 255, 0.13) 52% 54%, transparent 54% 100%),
+    linear-gradient(155deg, transparent 0 62%, rgba(255, 255, 255, 0.1) 62% 64%, transparent 64% 100%),
+    linear-gradient(70deg, transparent 0 35%, rgba(229, 57, 53, 0.16) 35% 37%, transparent 37% 100%);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.accessSection::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.accessSection .container {
+  position: relative;
+  z-index: 1;
+}
+
+.accessSection__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(5, 12, 22, .72),
+      rgba(5, 12, 22, .42)
+    );
+}
+
+.accessSection__head {
+  margin-bottom: 30px;
+}
+
+.accessGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: stretch;
+}
+
+.accessCard {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.accessCard__title {
+  margin: 0 0 10px;
+  color: #ff3b42;
+  font-size: 26px;
+  line-height: 1.28;
+  font-weight: 900;
+}
+
+.accessInfo {
+  margin-bottom: 14px;
+}
+
+.accessInfo__postcode,
+.accessInfo__address {
+  margin: 0 0 3px;
+  color: rgba(255, 255, 255, .78);
+  font-size: 14px;
+  line-height: 1.45;
   font-weight: 700;
 }
 
 .accessInfo__address {
-  margin: 0;
   color: #fff;
-  font-size: 20px;
-  font-weight: 800;
 }
 
-/* Google Map */
 .mapPreview {
   position: relative;
-  min-height: 360px;
+  min-height: 260px;
   flex: 1;
   overflow: hidden;
-  border-radius: 18px;
+  border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, .16);
   background: #071120;
 }
@@ -597,42 +857,15 @@ img {
 .mapPreview__iframe {
   width: 100%;
   height: 100%;
-  min-height: 360px;
+  min-height: 260px;
   display: block;
   border: 0;
   filter: grayscale(25%) contrast(105%) brightness(80%);
 }
 
-
-/* Recruit */
-.recruitDetails {
-  display: grid;
-  gap: 14px;
-}
-
-.recruitDetail {
-  padding: 16px;
-  border: 1px solid rgba(255, 255, 255, .12);
-  border-radius: 16px;
-  background: rgba(255, 255, 255, .05);
-}
-
-.recruitDetail h4 {
-  margin: 0 0 6px;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 900;
-}
-
-.recruitDetail p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 14px;
-}
-
 #contact,
-#access,
-#recruit {
+#recruit,
+#access {
   scroll-margin-top: 110px;
 }
 
@@ -668,6 +901,7 @@ img {
   color: #fff;
 }
 
+
 /* ==============================
    Responsive
 ============================== */
@@ -680,8 +914,8 @@ img {
 
 @media (max-width: 900px) {
   .about__grid,
-  .accessGrid,
-  .contactRecruitGrid {
+  .contactRecruit__grid,
+  .accessGrid {
     grid-template-columns: 1fr;
   }
 
@@ -744,13 +978,8 @@ img {
     right: 0;
   }
 
-  .logo {
-    padding: 4px 8px;
-    border-radius: 10px;
-  }
-
-  .logo__image {
-    height: 40px;
+  .logo__text {
+    font-size: 15px;
   }
 
   .hero {
@@ -782,9 +1011,22 @@ img {
   .about__company,
   .about__strength,
   .contactCard,
-  .accessCard,
   .recruitCard {
     padding: 24px;
+  }
+
+  .accessCard {
+    padding: 20px;
+  }
+
+  .accessCard__title {
+    font-size: 22px;
+  }
+
+  .accessInfo__postcode,
+  .accessInfo__address {
+    font-size: 13px;
+    line-height: 1.4;
   }
 
   .serviceCards {
@@ -811,23 +1053,12 @@ img {
     font-size: 16px;
   }
 
-
   .mapPreview {
-    min-height: 300px;
+    min-height: 230px;
   }
 
   .mapPreview__iframe {
-    min-height: 300px;
-  }
-
-
-
-  .recruitDetail {
-    padding: 14px;
-  }
-
-  .recruitDetail h4 {
-    font-size: 17px;
+    min-height: 230px;
   }
 
   .footer__inner {

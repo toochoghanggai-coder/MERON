@@ -25,9 +25,11 @@
         <a href="#top">ホーム</a>
         <a href="#about">会社概要</a>
         <a href="#services">事業内容</a>
-        <a href="#access">アクセスマップ</a>
         <a href="#contact">お問い合わせ</a>
         <a href="#recruit">求人情報</a>
+        <a href="#access">アクセスマップ</a>
+       <!-- <a href="#contact" class="nav__cta">お問い合わせ</a>-->
+        
       </nav>
     </div>
   </header>
@@ -171,16 +173,101 @@
     </div>
   </section>
 
-<!-- Contact / Access / Recruit -->
-<section class="contact">
-  <div class="contact__overlay"></div>
+
+<!-- Contact / Recruit -->
+<section class="contactRecruit" id="contact">
+  <div class="container">
+    <div class="contactRecruit__grid">
+      <!-- お問い合わせカード -->
+<div class="contactCard">
+  <div class="contactCard__head">
+    <span class="contactCard__label">CONTACT</span>
+    <h2>お問い合わせ</h2>
+    <p>買取・購入・取付・輸出のご相談は、下記よりお気軽にお問い合わせください。</p>
+  </div>
+
+  <div class="contactCard__boxes">
+    <a class="contactCard__box" href="tel:0493813642">
+      <span class="contactCard__icon">📞</span>
+      <span class="contactCard__body">
+        <span class="contactCard__boxLabel">電話番号</span>
+        <span class="contactCard__value">04-9381-3642</span>
+      </span>
+    </a>
+
+    <div class="contactCard__box">
+      <span class="contactCard__icon">📠</span>
+      <span class="contactCard__body">
+        <span class="contactCard__boxLabel">FAX番号</span>
+        <span class="contactCard__value">04-9381-3940</span>
+      </span>
+    </div>
+
+    <a class="contactCard__box" href="https://line.me/R/ti/p/@hanggai53" target="_blank" rel="noopener">
+      <span class="contactCard__icon">💬</span>
+      <span class="contactCard__body">
+        <span class="contactCard__boxLabel">LINE</span>
+        <span class="contactCard__value">LINEでお問い合わせ</span>
+      </span>
+    </a>
+
+    <a class="contactCard__box" href="mailto:sales@ireedui.jp">
+      <span class="contactCard__icon">✉️</span>
+      <span class="contactCard__body">
+        <span class="contactCard__boxLabel">メールアドレス</span>
+        <span class="contactCard__value">sales@ireedui.jp</span>
+      </span>
+    </a>
+  </div>
+</div>
+      <!-- 求人情報カード -->
+       <div class="recruitCard" id="recruit">
+  <div class="recruitCard__head">
+    <span class="recruitCard__label">RECRUIT</span>
+    <h2>求人情報</h2>
+    <p>動ける人が、現場を支える。未経験大歓迎。</p>
+  </div>
+
+  <div class="recruitCard__boxes">
+    <div class="recruitCard__box">
+      <h3>仕事内容</h3>
+      <ul>
+        <li>タイヤ・ホイールの査定、買取</li>
+        <li>店頭販売・取付・接客</li>
+        <li>商品の洗浄・撮影・出品</li>
+        <li>在庫管理・発送</li>
+        <li>コンテナ搬出入・海外輸出</li>
+      </ul>
+    </div>
+
+    <div class="recruitCard__box">
+      <h3>こんな方を歓迎</h3>
+      <ul>
+        <li>体を動かす仕事が好き</li>
+        <li>現場仕事にやりがいを感じる</li>
+        <li>元気と行動力に自信がある</li>
+      </ul>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- Access -->
+<section class="accessSection" id="access">
+  <div class="accessSection__overlay"></div>
 
   <div class="container">
-    <!-- 上段：アクセスマップ 2枚横並び -->
-    <div class="accessGrid" id="access">
-      <!-- 本社アクセス -->
+    <div class="sectionHead center accessSection__head">
+      <h2>アクセスマップ</h2>
+      <p>ACCESS MAP</p>
+    </div>
+
+    <div class="accessGrid">
+      <!-- 本社所在地 -->
       <div class="accessCard">
-        <h3 class="about__title">本社</h3>
+        <h3 class="accessCard__title">本社所在地</h3>
 
         <div class="accessInfo">
           <p class="accessInfo__postcode">〒369-0105</p>
@@ -193,14 +280,14 @@
             src="https://www.google.com/maps?q=埼玉県熊谷市箕輪373-3&output=embed"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-            title="株式会社IREEDUI 本社">
+            title="株式会社IREEDUI 本社所在地">
           </iframe>
         </div>
       </div>
 
-      <!-- 店舗アクセス -->
+      <!-- 店舗・タイヤ交換作業場所 -->
       <div class="accessCard">
-        <h3 class="about__title">店舗（２５４滑川タイヤ）</h3>
+        <h3 class="accessCard__title">店舗所在地</h3>
 
         <div class="accessInfo">
           <p class="accessInfo__postcode">〒355-0813</p>
@@ -213,82 +300,9 @@
             src="https://www.google.com/maps?q=埼玉県比企郡滑川町月輪１５９７−３&output=embed"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-            title="株式会社IREEDUI 店舗（２５４滑川タイヤ）">
+            title="店舗所在地">
           </iframe>
         </div>
-      </div>
-    </div>
-
-    <!-- 下段：お問い合わせ・求人情報 2枚横並び -->
-    <div class="contactRecruitGrid">
-      <!-- お問い合わせカード -->
-      <div class="contactCard" id="contact">
-        <h3 class="about__title">お問い合わせ</h3>
-        <p class="contactCard__lead">
-          買取・購入・取付・輸出のご相談は、下記よりお気軽にお問い合わせください。
-        </p>
-
-        <div class="contactLinks">
-          <a class="contactLink" href="tel:0493813642">
-            <span class="contactLink__icon">📞</span>
-            <span class="contactLink__body">
-              <span class="contactLink__label">電話番号</span>
-              <span class="contactLink__value">04-9381-3642</span>
-            </span>
-          </a>
-
-          <div class="contactLink">
-            <span class="contactLink__icon">📠</span>
-            <span class="contactLink__body">
-              <span class="contactLink__label">FAX番号</span>
-              <span class="contactLink__value">04-9381-3940</span>
-            </span>
-          </div>
-
-          <a class="contactLink" href="https://line.me/R/ti/p/@hanggai53" target="_blank" rel="noopener">
-            <span class="contactLink__icon">💬</span>
-            <span class="contactLink__body">
-              <span class="contactLink__label">LINE</span>
-              <span class="contactLink__value">LINEでお問い合わせ</span>
-            </span>
-          </a>
-
-          <a class="contactLink" href="mailto:sales@ireedui.jp">
-            <span class="contactLink__icon">✉️</span>
-            <span class="contactLink__body">
-              <span class="contactLink__label">メールアドレス</span>
-              <span class="contactLink__value">sales@ireedui.jp</span>
-            </span>
-          </a>
-        </div>
-      </div>
-
-      <!-- 求人情報カード -->
-      <div class="recruitCard" id="recruit">
-        <h3 class="about__title">求人情報</h3>
-        <p class="recruitCard__lead">
-          タイヤの積み込み・整理・販売サポートなど、体を動かす仕事です。
-          未経験の方も歓迎します。
-        </p>
-
-        <div class="recruitDetails">
-          <div class="recruitDetail">
-            <h4>仕事内容</h4>
-            <p>中古タイヤの積み込み、整理、店頭作業、販売サポートなどを行います。</p>
-          </div>
-
-          <div class="recruitDetail">
-            <h4>こんな方を歓迎</h4>
-            <p>体を動かす仕事が好きな方、車やタイヤに興味がある方、未経験から仕事を覚えたい方。</p>
-          </div>
-
-          <div class="recruitDetail">
-            <h4>応募について</h4>
-            <p>詳しい募集条件・勤務時間・給与などは、お問い合わせ時にご案内します。</p>
-          </div>
-        </div>
-      </div>
-
       </div>
     </div>
   </div>
