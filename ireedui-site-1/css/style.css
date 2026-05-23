@@ -59,7 +59,7 @@ img {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(5, 11, 22, .92);
+  background: rgba(0, 0, 0, .72);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(255, 255, 255, .08);
 }
@@ -74,8 +74,11 @@ img {
 .logo {
   display: flex;
   align-items: center;
-  gap: 12px;
-  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, .28);
+  backdrop-filter: blur(8px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .04);
 }
 
 .logo__image {
@@ -83,6 +86,8 @@ img {
   width: auto;
   display: block;
   object-fit: contain;
+  mix-blend-mode: normal;
+  filter: brightness(.92) contrast(1.08);
 }
 
 .logo__text {
@@ -329,7 +334,13 @@ img {
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: linear-gradient(135deg, #2c6bff, #1a2d5a);
+  background:
+    linear-gradient(135deg, rgba(216, 31, 38, .42), rgba(5, 11, 22, .95));
+  border: 1px solid rgba(255, 255, 255, .12);
+  box-shadow:
+    inset 0 0 18px rgba(216, 31, 38, .18),
+    0 10px 24px rgba(0, 0, 0, .28);
+  color: #fff;
   font-size: 24px;
 }
 
@@ -429,7 +440,7 @@ img {
 
 
 /* ==============================
-   Contact / Access
+   Contact / Access / Recruit
 ============================== */
 .contact {
   position: relative;
@@ -454,20 +465,28 @@ img {
   z-index: 1;
 }
 
-.contact__head {
-  margin-bottom: 34px;
+
+/* 上段：アクセスマップ2枚 */
+.accessGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: stretch;
+  margin-bottom: 28px;
 }
 
-.contact__grid {
+/* 下段：お問い合わせ・求人情報 */
+.contactRecruitGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 28px;
   align-items: stretch;
 }
 
-/* お問い合わせカード・アクセスカード共通 */
+/* カード共通 */
 .contactCard,
-.accessCard {
+.accessCard,
+.recruitCard {
   background: rgba(8, 18, 36, .68);
   border: 1px solid rgba(255, 255, 255, .12);
   border-radius: var(--radius);
@@ -476,21 +495,14 @@ img {
   backdrop-filter: blur(4px);
 }
 
-/* アクセスカードは中の地図エリアを縦に伸ばしやすくする */
+/* アクセスカードは中の地図エリアを伸ばしやすくする */
 .accessCard {
   display: flex;
   flex-direction: column;
 }
 
-.contactCard__title,
-.accessCard__title {
-  margin: 0 0 16px;
-  color: #ff3b42;
-  font-size: 34px;
-  font-weight: 900;
-}
-
-.contactCard__lead {
+.contactCard__lead,
+.recruitCard__lead {
   margin: 0 0 24px;
   color: var(--muted);
   font-size: 16px;
@@ -525,7 +537,13 @@ img {
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: linear-gradient(135deg, #2c6bff, #1a2d5a);
+  background:
+    linear-gradient(135deg, rgba(216, 31, 38, .42), rgba(5, 11, 22, .95));
+  border: 1px solid rgba(255, 255, 255, .12);
+  box-shadow:
+    inset 0 0 18px rgba(216, 31, 38, .18),
+    0 10px 24px rgba(0, 0, 0, .28);
+  color: #fff;
   font-size: 24px;
 }
 
@@ -565,10 +583,10 @@ img {
   font-weight: 800;
 }
 
-/* Google Map風カード */
+/* Google Map */
 .mapPreview {
   position: relative;
-  min-height: 420px;
+  min-height: 360px;
   flex: 1;
   overflow: hidden;
   border-radius: 18px;
@@ -579,37 +597,42 @@ img {
 .mapPreview__iframe {
   width: 100%;
   height: 100%;
-  min-height: 420px;
+  min-height: 360px;
   display: block;
   border: 0;
   filter: grayscale(25%) contrast(105%) brightness(80%);
 }
 
-.mapPreview__button {
-  position: absolute;
-  right: 18px;
-  bottom: 18px;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 18px;
-  border-radius: 999px;
-  background: var(--accent);
-  color: #fff;
-  font-size: 14px;
-  font-weight: 800;
-  box-shadow: 0 14px 30px rgba(0, 0, 0, .32);
-  transition: transform .2s ease, background .2s ease;
+
+/* Recruit */
+.recruitDetails {
+  display: grid;
+  gap: 14px;
 }
 
-.mapPreview__button:hover {
-  transform: translateY(-2px);
-  background: #f02a31;
+.recruitDetail {
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .05);
+}
+
+.recruitDetail h4 {
+  margin: 0 0 6px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.recruitDetail p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
 }
 
 #contact,
-#access {
+#access,
+#recruit {
   scroll-margin-top: 110px;
 }
 
@@ -653,23 +676,17 @@ img {
     grid-template-columns: repeat(2, minmax(260px, 1fr));
     justify-content: center;
   }
-
-  .flowSteps {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 @media (max-width: 900px) {
-  .about__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .contact__grid {
+  .about__grid,
+  .accessGrid,
+  .contactRecruitGrid {
     grid-template-columns: 1fr;
   }
 
   .serviceCards {
-  grid-template-columns: repeat(2, minmax(240px, 1fr));
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
   }
 
   .navToggle {
@@ -710,25 +727,30 @@ img {
     width: min(var(--container), calc(100% - 28px));
   }
 
- .header__inner {
-  position: relative;
-  justify-content: center;
-  min-height: 72px;
-}
+  .header__inner {
+    position: relative;
+    justify-content: center;
+    min-height: 72px;
+  }
 
-.header .logo {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
+  .header .logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
-.navToggle {
-  position: absolute;
-  right: 0;
-}
+  .navToggle {
+    position: absolute;
+    right: 0;
+  }
 
-  .logo__text {
-    font-size: 15px;
+  .logo {
+    padding: 4px 8px;
+    border-radius: 10px;
+  }
+
+  .logo__image {
+    height: 40px;
   }
 
   .hero {
@@ -760,12 +782,12 @@ img {
   .about__company,
   .about__strength,
   .contactCard,
-  .accessCard {
+  .accessCard,
+  .recruitCard {
     padding: 24px;
   }
 
-  .serviceCards,
-  .flowSteps {
+  .serviceCards {
     grid-template-columns: 1fr;
   }
 
@@ -789,69 +811,23 @@ img {
     font-size: 16px;
   }
 
-.mapPreview {
-  min-height: 300px;
-}
 
-.mapPreview__iframe {
-  min-height: 300px;
-}
-
-.mapPreview__button {
-  right: 14px;
-  bottom: 14px;
-  padding: 10px 14px;
-  font-size: 13px;
-}
-
-  .faqItem summary {
-    font-size: 22px;
+  .mapPreview {
+    min-height: 300px;
   }
 
-  .contact__icons {
-    justify-content: flex-start;
+  .mapPreview__iframe {
+    min-height: 300px;
   }
 
-  .footer__inner {
-    flex-direction: column;
-    text-align: center;
-  }
-}
 
-.contactLink__icon {
-  width: 48px;
-  height: 48px;
-  font-size: 22px;
-}
 
-.contactLink__value {
-  font-size: 16px;
-}
-
-.mapPreview {
-  min-height: 220px;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-}
-
-.mapPreview__pin {
-  width: 58px;
-  height: 58px;
-  margin-right: 14px;
-  font-size: 28px;
-}
-
-.mapPreview__text span {
-  font-size: 18px;
-}
-
-.faqItem summary {
-    font-size: 22px;
+  .recruitDetail {
+    padding: 14px;
   }
 
-  .contact__icons {
-    justify-content: flex-start;
+  .recruitDetail h4 {
+    font-size: 17px;
   }
 
   .footer__inner {
