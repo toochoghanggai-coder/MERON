@@ -8,13 +8,13 @@
   <link rel="stylesheet" href="./css/style.css" />
 </head>
 <body>
-
+ <div id="top"></div>
   <!-- Header -->
-  <header class="header" id="top">
+  <header class="header">
     <div class="container header__inner">
       <a href="#top" class="logo">
         <img src="assets/img/logo.png" alt="株式会社 IREEDUI ロゴ" class="logo__image">
-        <span class="logo__text">株式会社 IREEDUI</span>
+        <!--<span class="logo__text">株式会社 IREEDUI</span>-->
       </a>
 
       <button class="navToggle" id="navToggle" aria-label="メニューを開閉" aria-expanded="false">
@@ -227,19 +227,25 @@
           <p class="accessInfo__postcode">埼玉県熊谷市箕輪373-3</p>
         </div>
 
+      <div class="mapPreview">
+        <iframe
+          class="mapPreview__iframe"
+          src="https://www.google.com/maps?q=埼玉県熊谷市箕輪373-3&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="株式会社IREEDUI アクセスマップ">
+        </iframe>
+
         <a
-          class="mapPreview"
+          class="mapPreview__button"
           href="https://www.google.com/maps/search/?api=1&query=埼玉県熊谷市箕輪373-3"
           target="_blank"
           rel="noopener"
-          aria-label="Google Mapで所在地を開く"
         >
-          <div class="mapPreview__pin">📍</div>
-          <div class="mapPreview__text">
-            <span>Google Mapで開く</span>
-            <small>クリックするとGoogle Mapへ移動します</small>
-          </div>
+          Google Mapで開く
         </a>
+      </div>
+
       </div>
     </div>
   </div>
@@ -250,7 +256,7 @@
     <div class="container footer__inner">
       <div class="footer__logo">
         <img src="assets/img/logo.png" alt="株式会社 IREEDUI ロゴ" class="logo__image">
-        <span class="logo__text">株式会社 IREEDUI</span>
+        <!--<span class="logo__text">株式会社 IREEDUI</span>-->
       </div>
       <p class="footer__copy">© <span id="year"></span> IREEDUI Inc. All rights reserved.</p>
       <a class="toTop" href="#top">↑</a>
