@@ -710,9 +710,22 @@ img {
     width: min(var(--container), calc(100% - 28px));
   }
 
-  .header__inner {
-    min-height: 72px;
-  }
+ .header__inner {
+  position: relative;
+  justify-content: center;
+  min-height: 72px;
+}
+
+.header .logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.navToggle {
+  position: absolute;
+  right: 0;
+}
 
   .logo__text {
     font-size: 15px;
