@@ -25,10 +25,9 @@
         <a href="#top">ホーム</a>
         <a href="#about">会社概要</a>
         <a href="#services">事業内容</a>
-        <a href="#contact">お問い合わせ</a>
         <a href="#access">アクセスマップ</a>
-       <!-- <a href="#contact" class="nav__cta">お問い合わせ</a>-->
-        
+        <a href="#contact">お問い合わせ</a>
+        <a href="#recruit">求人情報</a>
       </nav>
     </div>
   </header>
@@ -172,34 +171,80 @@
     </div>
   </section>
 
-<!-- Contact -->
-<section class="contact" id="contact">
+<!-- Contact / Access / Recruit -->
+<section class="contact">
   <div class="contact__overlay"></div>
 
   <div class="container">
-    <div class="contact__grid">
+    <!-- 上段：アクセスマップ 2枚横並び -->
+    <div class="accessGrid" id="access">
+      <!-- 本社アクセス -->
+      <div class="accessCard">
+        <h3 class="about__title">本社</h3>
+
+        <div class="accessInfo">
+          <p class="accessInfo__postcode">〒369-0105</p>
+          <p class="accessInfo__address">埼玉県熊谷市箕輪373-3</p>
+        </div>
+
+        <div class="mapPreview">
+          <iframe
+            class="mapPreview__iframe"
+            src="https://www.google.com/maps?q=埼玉県熊谷市箕輪373-3&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="株式会社IREEDUI 本社">
+          </iframe>
+        </div>
+      </div>
+
+      <!-- 店舗アクセス -->
+      <div class="accessCard">
+        <h3 class="about__title">店舗（２５４滑川タイヤ）</h3>
+
+        <div class="accessInfo">
+          <p class="accessInfo__postcode">〒355-0813</p>
+          <p class="accessInfo__address">埼玉県比企郡滑川町月輪１５９７−３</p>
+        </div>
+
+        <div class="mapPreview">
+          <iframe
+            class="mapPreview__iframe"
+            src="https://www.google.com/maps?q=埼玉県比企郡滑川町月輪１５９７−３&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="株式会社IREEDUI 店舗（２５４滑川タイヤ）">
+          </iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- 下段：お問い合わせ・求人情報 2枚横並び -->
+    <div class="contactRecruitGrid">
       <!-- お問い合わせカード -->
-      <div class="contactCard">
+      <div class="contactCard" id="contact">
         <h3 class="about__title">お問い合わせ</h3>
         <p class="contactCard__lead">
           買取・購入・取付・輸出のご相談は、下記よりお気軽にお問い合わせください。
         </p>
 
         <div class="contactLinks">
-          <a class="contactLink" href="tel:0000000000">
+          <a class="contactLink" href="tel:0493813642">
             <span class="contactLink__icon">📞</span>
             <span class="contactLink__body">
               <span class="contactLink__label">電話番号</span>
               <span class="contactLink__value">04-9381-3642</span>
             </span>
           </a>
-        <div class="contactLink">
-          <span class="contactLink__icon">📠</span>
-          <span class="contactLink__body">
-            <span class="contactLink__label">FAX番号</span>
-            <span class="contactLink__value">04-9381-3940</span>
-          </span>
-        </div>
+
+          <div class="contactLink">
+            <span class="contactLink__icon">📠</span>
+            <span class="contactLink__body">
+              <span class="contactLink__label">FAX番号</span>
+              <span class="contactLink__value">04-9381-3940</span>
+            </span>
+          </div>
+
           <a class="contactLink" href="https://line.me/R/ti/p/@hanggai53" target="_blank" rel="noopener">
             <span class="contactLink__icon">💬</span>
             <span class="contactLink__body">
@@ -208,7 +253,7 @@
             </span>
           </a>
 
-          <a class="contactLink" href="mailto:info@example.com">
+          <a class="contactLink" href="mailto:sales@ireedui.jp">
             <span class="contactLink__icon">✉️</span>
             <span class="contactLink__body">
               <span class="contactLink__label">メールアドレス</span>
@@ -218,32 +263,30 @@
         </div>
       </div>
 
-      <!-- アクセスマップカード -->
-      <div class="accessCard" id="access">
-        <h3 class="about__title">アクセスマップ</h3>
+      <!-- 求人情報カード -->
+      <div class="recruitCard" id="recruit">
+        <h3 class="about__title">求人情報</h3>
+        <p class="recruitCard__lead">
+          タイヤの積み込み・整理・販売サポートなど、体を動かす仕事です。
+          未経験の方も歓迎します。
+        </p>
 
-        <div class="accessInfo">
-          <p class="accessInfo__postcode">〒369-0105</p>
-          <p class="accessInfo__postcode">埼玉県熊谷市箕輪373-3</p>
+        <div class="recruitDetails">
+          <div class="recruitDetail">
+            <h4>仕事内容</h4>
+            <p>中古タイヤの積み込み、整理、店頭作業、販売サポートなどを行います。</p>
+          </div>
+
+          <div class="recruitDetail">
+            <h4>こんな方を歓迎</h4>
+            <p>体を動かす仕事が好きな方、車やタイヤに興味がある方、未経験から仕事を覚えたい方。</p>
+          </div>
+
+          <div class="recruitDetail">
+            <h4>応募について</h4>
+            <p>詳しい募集条件・勤務時間・給与などは、お問い合わせ時にご案内します。</p>
+          </div>
         </div>
-
-      <div class="mapPreview">
-        <iframe
-          class="mapPreview__iframe"
-          src="https://www.google.com/maps?q=埼玉県熊谷市箕輪373-3&output=embed"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="株式会社IREEDUI アクセスマップ">
-        </iframe>
-
-        <a
-          class="mapPreview__button"
-          href="https://www.google.com/maps/search/?api=1&query=埼玉県熊谷市箕輪373-3"
-          target="_blank"
-          rel="noopener"
-        >
-          Google Mapで開く
-        </a>
       </div>
 
       </div>
