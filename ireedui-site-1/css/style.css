@@ -90,11 +90,6 @@ img {
   filter: brightness(.92) contrast(1.08);
 }
 
-.logo__text {
-  font-weight: 700;
-  color: #111827;
-  letter-spacing: 0.03em;
-}
 
 .footer__logo {
   display: flex;
@@ -103,23 +98,7 @@ img {
   font-weight: 800;
 }
 
-.logo__mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  font-size: 22px;
-  font-weight: 900;
-  color: #fff;
-  background: linear-gradient(135deg, var(--accent), #111);
-  border-radius: 12px;
-}
 
-.logo__text {
-  font-size: 18px;
-  letter-spacing: .04em;
-}
 
 .nav {
   display: flex;
@@ -133,12 +112,6 @@ img {
   color: rgba(255, 255, 255, .9);
 }
 
-.nav__cta {
-  padding: 12px 20px;
-  border-radius: 10px;
-  background: var(--accent);
-  color: #fff !important;
-}
 
 .navToggle {
   display: none;
@@ -265,7 +238,7 @@ img {
 
 .about__company,
 .about__strength {
-  background: rgba(8, 18, 36, .65);
+  background: rgba(6, 9, 14, .60);
   border: 1px solid rgba(255, 255, 255, .12);
   border-radius: var(--radius);
   padding: 32px;
@@ -360,7 +333,8 @@ img {
 .services {
   padding: 90px 0;
   background:
-    linear-gradient(180deg, #071120 0%, #08172b 100%);
+    linear-gradient(rgba(6, 14, 28, .82), rgba(6, 14, 28, .1)),
+    url("../assets/img/services-bg.png") center / cover no-repeat;
 }
 
 .serviceCards {
@@ -422,9 +396,6 @@ img {
   background-image: url("../assets/img/service-buy.png");
 }
 
-.serviceCard--auction {
-  background-image: url("../assets/img/service-auction.png");
-}
 
 .serviceCard--export {
   background-image: url("../assets/img/service-export.png");
@@ -446,7 +417,9 @@ img {
 .contactRecruit {
   position: relative;
   padding: 80px 0 44px;
-  background: var(--bg);
+  background:
+    linear-gradient(rgba(6, 14, 28, .82), rgba(6, 14, 28, .88)),
+    url("../assets/img/about-bg.png") center / cover no-repeat;
 }
 
 .contactRecruit__grid {
@@ -459,7 +432,6 @@ img {
 .contactCard,
 .recruitCard,
 .accessCard {
-  background: rgba(8, 18, 36, .68);
   border: 1px solid rgba(255, 255, 255, .12);
   border-radius: var(--radius);
   padding: 32px;
@@ -467,74 +439,18 @@ img {
   backdrop-filter: blur(4px);
 }
 
-.contactCard__lead,
-.recruitCard__lead {
-  margin: 0 0 24px;
-  color: var(--muted);
-  font-size: 16px;
-}
 
-.contactLinks {
-  display: grid;
-  gap: 14px;
-}
 
-.contactLink {
-  display: grid;
-  grid-template-columns: 58px 1fr;
-  gap: 14px;
-  align-items: center;
-  padding: 16px;
-  border: 1px solid rgba(255, 255, 255, .12);
-  border-radius: 16px;
-  background: rgba(255, 255, 255, .05);
-  transition: transform .2s ease, background .2s ease, border-color .2s ease;
-}
 
-.contactLink:hover {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, .08);
-  border-color: rgba(255, 255, 255, .24);
-}
 
-.contactLink__icon {
-  width: 58px;
-  height: 58px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background:
-    linear-gradient(135deg, rgba(216, 31, 38, .42), rgba(5, 11, 22, .95));
-  border: 1px solid rgba(255, 255, 255, .12);
-  box-shadow:
-    inset 0 0 18px rgba(216, 31, 38, .18),
-    0 10px 24px rgba(0, 0, 0, .28);
-  color: #fff;
-  font-size: 24px;
-}
 
-.contactLink__body {
-  display: grid;
-  gap: 2px;
-}
 
-.contactLink__label {
-  color: rgba(255, 255, 255, .68);
-  font-size: 13px;
-  font-weight: 700;
-}
 
-.contactLink__value {
-  color: #fff;
-  font-size: 18px;
-  font-weight: 800;
-  word-break: break-all;
-}
 
 .contactCard {
   padding: 28px;
   border-radius: 26px;
-  background: #151515;
+  background: rgba(6, 9, 14, .60);
   color: #fff;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
 }
@@ -595,7 +511,13 @@ img {
   height: 42px;
   flex-shrink: 0;
   border-radius: 14px;
-  background: rgba(229, 57, 53, 0.16);
+  background:
+    linear-gradient(135deg, rgba(216, 31, 38, .42), rgba(5, 11, 22, .95));
+  border: 1px solid rgba(255, 255, 255, .12);
+  box-shadow:
+    inset 0 0 18px rgba(216, 31, 38, .18),
+    0 10px 24px rgba(0, 0, 0, .28);
+  color: #fff;
   font-size: 20px;
 }
 
@@ -617,19 +539,8 @@ img {
   color: #fff;
 }
 
-.contactCard__box--accent {
-  background: linear-gradient(135deg, #e53935, #991313);
-  border: none;
-}
 
-.contactCard__box--accent .contactCard__icon {
-  background: rgba(255, 255, 255, 0.18);
-}
 
-.contactCard__box--accent .contactCard__boxLabel,
-.contactCard__box--accent .contactCard__value {
-  color: #fff;
-}
 
 @media (max-width: 768px) {
   .contactCard {
@@ -644,7 +555,7 @@ img {
 .recruitCard {
   padding: 28px;
   border-radius: 26px;
-  background: #151515;
+  background: rgba(6, 9, 14, .60);
   color: #fff;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
 }
@@ -730,14 +641,7 @@ img {
   line-height: 1.7;
 }
 
-.recruitCard__box--accent {
-  background: linear-gradient(135deg, #e53935, #991313);
-  border: none;
-}
 
-.recruitCard__box--accent p {
-  color: #fff;
-}
 
 @media (max-width: 768px) {
   .recruitCard {
@@ -753,53 +657,15 @@ img {
    Access
 ============================== */
 .accessSection {
-  position: relative;
-  overflow: hidden;
   padding: 80px 0;
   background:
-    linear-gradient(135deg, rgba(229, 57, 53, 0.18), transparent 34%),
-    linear-gradient(180deg, #34383d 0%, #24272c 100%);
-}
-
-.accessSection::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(28deg, transparent 0 42%, rgba(255, 255, 255, 0.16) 42% 44%, transparent 44% 100%),
-    linear-gradient(115deg, transparent 0 52%, rgba(255, 255, 255, 0.13) 52% 54%, transparent 54% 100%),
-    linear-gradient(155deg, transparent 0 62%, rgba(255, 255, 255, 0.1) 62% 64%, transparent 64% 100%),
-    linear-gradient(70deg, transparent 0 35%, rgba(229, 57, 53, 0.16) 35% 37%, transparent 37% 100%);
-  opacity: 0.9;
-  pointer-events: none;
-}
-
-.accessSection::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-    linear-gradient(0deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 56px 56px;
-  opacity: 0.55;
-  pointer-events: none;
+    linear-gradient(rgba(6, 14, 28, .82), rgba(6, 14, 28, .1)),
+    url("../assets/img/services-bg.png") center / cover no-repeat;
 }
 
 .accessSection .container {
   position: relative;
   z-index: 1;
-}
-
-.accessSection__overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(
-      135deg,
-      rgba(5, 12, 22, .72),
-      rgba(5, 12, 22, .42)
-    );
 }
 
 .accessSection__head {
@@ -817,11 +683,11 @@ img {
   display: flex;
   flex-direction: column;
   padding: 24px;
+  background: rgba(6, 9, 14, .60);
 }
 
 .accessCard__title {
   margin: 0 0 10px;
-  color: #ff3b42;
   font-size: 26px;
   line-height: 1.28;
   font-weight: 900;
@@ -840,9 +706,6 @@ img {
   font-weight: 700;
 }
 
-.accessInfo__address {
-  color: #fff;
-}
 
 .mapPreview {
   position: relative;
@@ -978,9 +841,7 @@ img {
     right: 0;
   }
 
-  .logo__text {
-    font-size: 15px;
-  }
+  
 
   .hero {
     min-height: 520px;
@@ -1038,20 +899,11 @@ img {
     gap: 6px;
   }
 
-  .contactLink {
-    grid-template-columns: 48px 1fr;
-    padding: 14px;
-  }
+  
 
-  .contactLink__icon {
-    width: 48px;
-    height: 48px;
-    font-size: 22px;
-  }
+  
 
-  .contactLink__value {
-    font-size: 16px;
-  }
+  
 
   .mapPreview {
     min-height: 230px;
