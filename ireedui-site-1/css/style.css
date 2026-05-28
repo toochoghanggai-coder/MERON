@@ -59,7 +59,7 @@ img {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(0, 0, 0, .72);
+  background: rgba(0, 0, 0, 1);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(255, 255, 255, .08);
 }
@@ -76,29 +76,18 @@ img {
   align-items: center;
   padding: 6px 12px;
   border-radius: 12px;
-  background: rgba(0, 0, 0, .28);
+  background: rgba(0, 0, 0, 1);
   backdrop-filter: blur(8px);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .04);
 }
 
 .logo__image {
-  height: 52px;
+  height: 45px;
   width: auto;
   display: block;
   object-fit: contain;
   mix-blend-mode: normal;
   filter: brightness(.92) contrast(1.08);
 }
-
-
-.footer__logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-weight: 800;
-}
-
-
 
 .nav {
   display: flex;
