@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>請求明細書テンプレート</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <section class="input-panel no-print">
+    <h1>請求明細書 入力画面</h1>
+    <div class="grid">
+      <label>請求日<input id="invoiceDate" type="date" value="2026-03-11"></label>
+      <label>締め区分<input id="closing" value="締切分"></label>
+      <label>郵便番号<input id="customerZip" value="〒421-0302"></label>
+      <label>住所<input id="customerAddress" value="静岡県榛原郡吉田町川尻3033-2"></label>
+      <label>請求先<input id="customerName" value="（株）KL貿易"></label>
+    </div>
+
+    <h2>商品明細</h2>
+    <table class="edit-table" id="editTable">
+      <thead><tr><th>日付</th><th>商品名</th><th>区分</th><th>数量</th><th>単位</th><th>単価</th><th></th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <button onclick="addRow()">＋ 明細追加</button>
+    <button onclick="renderInvoice()">反映</button>
+    <button onclick="window.print()">PDF保存 / 印刷</button>
+  </section>
+
+  <main class="sheet" id="invoice">
+    <h2 class="title">請求明細書</h2>
+
+    <div class="top">
+      <div class="customer">
+        <p id="outZip">〒421-0302</p>
+        <p>住所　<span id="outAddress">静岡県榛原郡吉田町川尻3033-2</span></p>
+        <p class="customer-name"><span id="outName">（株）KL貿易</span>　御中</p>
+        <p>TEL：0548-58-2158</p>
+        <p>FAX：0548-58-2159</p>
+      </div>
+
+      <div class="company">
+        <div class="date-line"><span id="outDate">2026年3月11日</span><span id="outClosing">締切分</span></div>
+        <div class="company-body">
+          <div>
+            <p>株式会社IREEDUI　254溝川タイヤ</p>
+            <p>〒369-0105</p>
+            <p>埼玉県熊谷市箕輪373-3</p>
+            <p>TEL0493-81-3642</p>
+            <p>FAX0493-81-3940</p>
+            <p>銀行振り込みの場合は下記にお願いします。</p>
+            <p>口座名義　株式会社IREEDUI</p>
+            <p>三菱UFJ銀行　東京店　普通0133764</p>
+            <p>登録番号：T4030001095529</p>
+          </div>
+          <div class="stamp">株式会社<br>IREEDUI<br>山営</div>
+        </div>
+        <table class="amount-box">
+          <tr><th>今回御請求金額</th></tr>
+          <tr><td id="grandTotalTop">¥164,780</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <table class="invoice-table">
+      <thead>
+        <tr><th>日付</th><th colspan="2">商品名</th><th>数量</th><th>単位</th><th>単価</th><th>金額</th></tr>
+      </thead>
+      <tbody id="invoiceRows"></tbody>
+      <tfoot>
+        <tr><td></td><td colspan="2"></td><td></td><td></td><th>小計</th><td id="subtotal">0</td></tr>
+        <tr><td></td><td colspan="2" class="total-label">本数</td><td id="totalQty">0</td><td></td><th>消費税</th><td id="tax">0</td></tr>
+        <tr><td></td><td colspan="2"></td><td></td><td></td><th>合計金額</th><td id="grandTotal">0</td></tr>
+      </tfoot>
+    </table>
+  </main>
+
+<script src="app.js"></script>
+</body>
+</html>
