@@ -1,0 +1,755 @@
+*{box-sizing:border-box}
+html{font-size:16px}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Yu Gothic",Meiryo,sans-serif;background:#f4f6f8;color:#111;font-size:16px;line-height:1.45}
+.container{max-width:1180px;margin:0 auto;padding:18px}.topbar{background:#1f2937;color:#fff;padding:12px 18px}.topbar__inner{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px}.topbar a{color:#fff;text-decoration:none;margin-left:14px;white-space:nowrap}.card{background:#fff;border:1px solid #ddd;border-radius:12px;padding:16px;margin:14px 0;box-shadow:0 2px 8px rgba(0,0,0,.04)}h1{font-size:24px;margin:8px 0 16px}h2{font-size:18px;margin:4px 0 12px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}label{display:block;font-weight:700;margin-bottom:5px}input,select,textarea{width:100%;padding:12px;border:1px solid #bbb;border-radius:8px;font-size:16px;background:#fff}input.small-date{max-width:180px}textarea{min-height:74px}.btns{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}.btn{border:0;border-radius:8px;padding:11px 16px;font-size:16px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;text-align:center}.btn.primary{background:#2563eb;color:#fff}.btn.gray{background:#e5e7eb;color:#111}.btn.green{background:#16a34a;color:#fff}.btn.red{background:#dc2626;color:#fff}.msg{padding:10px;border-radius:8px;margin:10px 0}.msg.ok{background:#dcfce7;color:#166534}.msg.err{background:#fee2e2;color:#991b1b}.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}table.list{width:100%;border-collapse:collapse;background:#fff;min-width:740px}table.list th,table.list td{border:1px solid #ddd;padding:8px;text-align:left;vertical-align:middle}table.list th{background:#f3f4f6}.pagination a,.pagination span{display:inline-block;padding:8px 11px;margin:4px;border:1px solid #ccc;border-radius:6px;text-decoration:none;color:#111}.pagination .current{background:#2563eb;color:#fff}.login-box{max-width:420px;margin:80px auto}.form-row{margin-bottom:12px}.mobile-note{color:#555;font-size:14px}
+/* 請求書レイアウト */
+.print-card{background:transparent;border:0;box-shadow:none;padding:0}.invoice-sheet{width:794px;min-height:1123px;background:#fff;margin:12px auto;padding:62px 68px;color:#111;font-family:"Yu Gothic","Meiryo",sans-serif;box-shadow:0 0 0 1px #ddd;overflow:hidden}.invoice-title{text-align:center;font-size:20px;font-weight:700;margin-bottom:20px}.invoice-head{display:grid;grid-template-columns:1fr 1fr;gap:20px}.right-info{position:relative;padding-right:96px}.stamp{position:absolute;right:0;top:46px;width:88px;height:88px;object-fit:contain;background:transparent;z-index:1}.amount-box{margin-top:8px;margin-left:auto;width:250px;border:3px solid #111;text-align:center;font-weight:700;background:#fff}.amount-box span{display:block;padding:4px}.amount-box div{border-top:2px solid #111;padding:8px}.invoice-table{width:100%;border-collapse:collapse;margin-top:22px;font-size:14px}.invoice-table th,.invoice-table td{border:1.5px solid #222;padding:5px;height:28px}.invoice-table th{text-align:center}.invoice-table td.num{text-align:right}.invoice-table .thick-top td{border-top:3px solid #111}
+@media(max-width:760px){
+  html{font-size:16px}body{background:#eef2f7}.container{padding:10px;max-width:100%;overflow-x:hidden}.card{padding:12px;border-radius:10px;margin:10px 0}h1{font-size:21px;margin:8px 0 12px}h2{font-size:17px}.grid,.grid2{grid-template-columns:1fr;gap:10px}input,select,textarea{font-size:17px;padding:13px;min-height:46px}input.small-date{max-width:170px}.btns{display:grid;grid-template-columns:1fr;gap:8px}.btn{width:100%;padding:12px 14px}.topbar{padding:10px 12px}.topbar__inner{display:block}.topbar nav{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}.topbar a{display:block;margin:0;padding:9px 8px;background:rgba(255,255,255,.12);border-radius:6px;text-align:center}.table-wrap{width:100%;overflow-x:auto}table.list{min-width:680px;font-size:14px}table.list th,table.list td{padding:7px}.login-box{margin:28px 10px}
+  /* 明細入力テーブルはスマホではカード型にする */
+  #itemsTable{min-width:0;border-collapse:separate;border-spacing:0 10px;background:transparent}
+  #itemsTable tbody,#itemsTable tr,#itemsTable td{display:block;width:100%}
+  #itemsTable tr:first-child{display:none}
+  #itemsTable tr{border:1px solid #ddd;border-radius:10px;background:#fff;padding:10px;margin-bottom:10px}
+  #itemsTable td{border:0!important;padding:5px 0}
+  #itemsTable td::before{display:block;font-weight:700;margin-bottom:4px;color:#374151;font-size:13px}
+  #itemsTable td:nth-child(1)::before{content:'日付'}#itemsTable td:nth-child(2)::before{content:'種別'}#itemsTable td:nth-child(3)::before{content:'商品名'}#itemsTable td:nth-child(4)::before{content:'グレード'}#itemsTable td:nth-child(5)::before{content:'数量(本)'}#itemsTable td:nth-child(6)::before{content:'単価'}#itemsTable td:nth-child(7)::before{content:'金額'}
+  /* スマホ表示用の請求書プレビュー。印刷時は下のprint設定を使う */
+  .print-card{overflow-x:hidden}.invoice-sheet{width:100%;min-width:0;min-height:auto;margin:10px 0;padding:16px 12px;box-shadow:0 0 0 1px #ddd;font-size:10.5px}.invoice-title{font-size:16px;margin-bottom:12px}.invoice-head{grid-template-columns:1fr 1fr;gap:10px}.right-info{padding-right:64px}.stamp{top:36px;right:0;width:58px;height:58px}.amount-box{width:150px;border-width:2px;font-size:11px}.amount-box span{padding:2px}.amount-box div{padding:4px;border-top-width:1px}.invoice-table{font-size:9.5px;margin-top:12px}.invoice-table th,.invoice-table td{padding:2px;height:20px;border-width:1px}.invoice-table .thick-top td{border-top-width:2px}
+}
+
+/* ===== receipt layout 20260719-02 ===== */
+.receipt-print-card{overflow:visible!important}
+.receipt-sheet.receipt-layout-classic{box-sizing:border-box!important;width:min(980px,100%)!important;height:auto!important;min-height:0!important;aspect-ratio:2.82/1!important;margin:12px auto!important;padding:0!important;overflow:hidden!important;background:#fff!important;color:#111!important;position:relative!important;box-shadow:0 0 0 1px #d6d6d6!important;font-family:"Yu Mincho","Hiragino Mincho ProN","Yu Gothic","Meiryo",serif!important}
+.receipt-layout-classic .classic-frame{position:absolute!important;inset:2.3%!important;box-sizing:border-box!important;border:4px double #111!important;padding:2.2% 3.4%!important;display:grid!important;grid-template-rows:auto auto auto auto 1fr!important;row-gap:2.1%!important;overflow:hidden!important}
+.receipt-layout-classic .receipt-document-header{position:relative!important;min-height:17%!important}
+.receipt-layout-classic .classic-title{position:static!important;margin:0!important;padding:0!important;text-align:center!important;border:0!important;font-size:clamp(12px,4.1vw,40px)!important;line-height:1!important;letter-spacing:.28em!important}
+.receipt-layout-classic .classic-title::after{content:""!important;display:block!important;width:20%!important;height:4px!important;margin:1.1% auto 0!important;border-top:1px solid #111!important;border-bottom:1px solid #111!important}
+.receipt-layout-classic .classic-meta{position:absolute!important;top:0!important;right:0!important;width:30%!important;font-size:clamp(5px,1.55vw,15px)!important;line-height:1.5!important;text-align:right!important}
+.receipt-layout-classic .classic-no,.receipt-layout-classic .classic-date{margin:0!important;white-space:nowrap!important;letter-spacing:0!important}
+.receipt-layout-classic .classic-no span{display:inline-block!important;min-width:48%!important;border-bottom:1px solid #111!important;text-align:center!important}
+.receipt-layout-classic .classic-date{display:flex!important;justify-content:flex-end!important;gap:.45em!important;margin-top:3%!important}
+.receipt-layout-classic .classic-date span{display:inline!important;min-width:0!important;white-space:nowrap!important}
+.receipt-layout-classic .classic-customer{position:static!important;box-sizing:border-box!important;width:48%!important;height:auto!important;min-height:10%!important;border-bottom:2px solid #111!important;font-size:clamp(6px,2vw,20px)!important;line-height:1.25!important;text-align:left!important;display:flex!important;align-items:flex-end!important}
+.receipt-layout-classic .classic-customer span{flex:1!important;overflow:hidden!important;white-space:nowrap!important;text-overflow:ellipsis!important}.receipt-layout-classic .classic-customer b{float:none!important;font-size:1.25em!important;line-height:1!important}
+.receipt-layout-classic .classic-amount-row{position:static!important;width:78%!important;margin-left:7%!important;display:grid!important;grid-template-columns:12% 1fr!important;column-gap:3%!important;align-items:center!important}
+.receipt-layout-classic .classic-amount-label{font-size:clamp(8px,2.8vw,28px)!important;white-space:nowrap!important}
+.receipt-layout-classic .classic-amount-box{box-sizing:border-box!important;width:100%!important;height:auto!important;min-height:clamp(22px,6.5vw,64px)!important;border:2px solid #111!important;display:grid!important;grid-template-columns:12% 1fr 10%!important;align-items:center!important}
+.receipt-layout-classic .classic-yen{font-size:clamp(9px,3.1vw,30px)!important;text-align:center!important}.receipt-layout-classic .classic-amount-value{font-size:clamp(9px,2.9vw,28px)!important;text-align:left!important;letter-spacing:.05em!important}.receipt-layout-classic .classic-currency{font-size:clamp(7px,2.2vw,22px)!important;text-align:center!important}
+.receipt-layout-classic .classic-description{position:static!important;box-sizing:border-box!important;width:82%!important;margin-left:7%!important;display:grid!important;grid-template-columns:8% 1fr!important;align-items:end!important;font-size:clamp(6px,1.8vw,18px)!important}
+.receipt-layout-classic .classic-description>span{line-height:1.25!important;white-space:nowrap!important}.receipt-layout-classic .classic-description>div{box-sizing:border-box!important;min-height:1.5em!important;max-height:2.7em!important;padding:0 .5em .15em!important;border-bottom:2px solid #111!important;font-size:.8em!important;line-height:1.25!important;overflow:hidden!important}
+.receipt-layout-classic .classic-content-row{min-height:0!important;display:grid!important;grid-template-columns:47% 45%!important;justify-content:space-between!important;align-items:end!important;gap:4%!important}
+.receipt-layout-classic .classic-breakdown-area{min-width:0!important;align-self:end!important}.receipt-layout-classic .classic-received-text{position:static!important;margin:0 0 2%!important;font-size:clamp(5px,1.45vw,14px)!important;white-space:nowrap!important}.receipt-layout-classic .classic-section-title{margin:0 0 1% 1%!important;font-size:clamp(5px,1.4vw,14px)!important;line-height:1.1!important}
+.receipt-layout-classic .classic-breakdown-table{width:76%!important;border-collapse:collapse!important;font-size:clamp(5px,1.25vw,12px)!important;table-layout:fixed!important}.receipt-layout-classic .classic-breakdown-table th,.receipt-layout-classic .classic-breakdown-table td{box-sizing:border-box!important;height:auto!important;padding:1.4% 2%!important;border:1px solid #111!important;background:#fff!important;white-space:nowrap!important;font-weight:400!important}.receipt-layout-classic .classic-breakdown-table th{width:58%!important;text-align:left!important}.receipt-layout-classic .classic-breakdown-table td{text-align:right!important}
+.receipt-layout-classic .classic-company-area{position:relative!important;box-sizing:border-box!important;min-height:0!important;padding:0 16% 0 0!important;align-self:end!important}.receipt-layout-classic .classic-company-info{font-size:clamp(4px,1.15vw,11px)!important;line-height:1.3!important;white-space:nowrap!important}.receipt-layout-classic .classic-company-name{margin:0 0 1%!important;font-size:clamp(6px,1.7vw,17px)!important;line-height:1.15!important;letter-spacing:.05em!important}.receipt-layout-classic .classic-stamp{position:absolute!important;right:1%!important;bottom:0!important;width:15%!important;height:auto!important;max-height:86%!important;object-fit:contain!important;opacity:.92!important}
+@media screen and (max-width:768px){.receipt-print-card{overflow:hidden!important;padding-left:4px!important;padding-right:4px!important}.receipt-sheet.receipt-layout-classic{width:100%!important;height:auto!important;margin:8px auto!important}.receipt-layout-classic .classic-frame{border-width:2px!important}.receipt-layout-classic .classic-title::after{height:2px!important}.receipt-layout-classic .classic-customer,.receipt-layout-classic .classic-amount-box,.receipt-layout-classic .classic-description>div{border-width:1px!important}}
+@media print{@page{size:A4 portrait!important;margin:0!important}html,body{width:210mm!important;height:297mm!important;margin:0!important;padding:0!important;background:#fff!important;overflow:hidden!important}body *{visibility:hidden!important}.receipt-print-card,.receipt-print-card *{visibility:visible!important}.no-print,.topbar,.print-hide{display:none!important}.container{width:210mm!important;max-width:none!important;height:297mm!important;margin:0!important;padding:0!important}.receipt-print-card{position:absolute!important;left:0!important;top:0!important;width:210mm!important;height:148.5mm!important;margin:0!important;padding:7mm!important;box-sizing:border-box!important;border:0!important;box-shadow:none!important;overflow:hidden!important}.receipt-sheet.receipt-layout-classic{width:196mm!important;height:auto!important;aspect-ratio:2.82/1!important;margin:0 auto!important;box-shadow:none!important;page-break-inside:avoid!important;break-inside:avoid!important}.receipt-layout-classic .classic-title{font-size:8mm!important}.receipt-layout-classic .classic-meta{font-size:3mm!important}.receipt-layout-classic .classic-customer{font-size:4mm!important}.receipt-layout-classic .classic-amount-label{font-size:5.5mm!important}.receipt-layout-classic .classic-yen,.receipt-layout-classic .classic-amount-value{font-size:5.8mm!important}.receipt-layout-classic .classic-currency{font-size:4.5mm!important}.receipt-layout-classic .classic-description{font-size:3.6mm!important}.receipt-layout-classic .classic-received-text,.receipt-layout-classic .classic-section-title{font-size:2.8mm!important}.receipt-layout-classic .classic-breakdown-table{font-size:2.5mm!important}.receipt-layout-classic .classic-company-info{font-size:2.3mm!important}.receipt-layout-classic .classic-company-name{font-size:3.4mm!important}}
+@page{size:A4;margin:0}
+@media print{
+  html,body{width:210mm;height:297mm;margin:0!important;padding:0!important;background:#fff;overflow:hidden}body *{visibility:hidden}.print-card,.print-card *{visibility:visible}.topbar,.no-print,.card:not(.print-card),h1{display:none!important}.container{padding:0!important;margin:0!important;max-width:none!important;width:210mm!important;height:297mm!important}.print-card{position:absolute;left:0;top:0;width:210mm!important;height:297mm!important;border:0!important;box-shadow:none!important;margin:0!important;padding:0!important;overflow:hidden!important;background:#fff!important;page-break-after:avoid;break-after:avoid}.invoice-sheet{position:absolute;left:0;top:0;width:210mm!important;height:297mm!important;min-height:0!important;margin:0!important;padding:13mm 16mm!important;box-shadow:none!important;overflow:hidden!important;page-break-after:avoid;break-after:avoid;font-size:11px}.invoice-title{font-size:16px;margin-bottom:10px}.invoice-head{grid-template-columns:1fr 1fr;gap:14px}.right-info{padding-right:25mm}.stamp{position:absolute;right:0;top:18mm;width:22mm;height:22mm}.amount-box{width:62mm;margin-top:3mm}.amount-box span{padding:1mm}.amount-box div{padding:2mm}.invoice-table{font-size:10.5px;margin-top:7mm}.invoice-table th,.invoice-table td{padding:1.2mm;height:6mm;border-width:.35mm}.invoice-table .thick-top td{border-top-width:.7mm}
+}
+
+
+/* ===== v5 mobile/input refinements ===== */
+:root{--control-h:38px;--control-py:7px;--control-px:10px}
+input,select,textarea{min-height:var(--control-h);padding:var(--control-py) var(--control-px)}
+.search-card .grid{grid-template-columns:repeat(5,minmax(0,1fr));align-items:end}
+.search-card input,.search-card select{height:38px;padding:6px 9px;font-size:15px}
+.action-cell{white-space:nowrap;display:flex;gap:6px;align-items:center}.btn.compact{padding:6px 9px;font-size:13px;border-radius:6px;line-height:1.1;width:auto;min-width:0}
+.form-compact .grid{grid-template-columns:1.1fr .7fr 1.2fr;align-items:end}.form-compact input,.form-compact select{height:38px;padding:6px 9px;font-size:15px}.form-compact .small-date{max-width:145px}.items-actions{justify-content:flex-start;margin-top:10px}.items-actions .btn{width:auto}
+#itemsTable input,#itemsTable select{height:36px;min-height:36px;padding:5px 7px;font-size:14px}#itemsTable th,#itemsTable td{padding:5px}#itemsTable .btn.red{padding:6px 8px;font-size:13px;width:auto}
+@media(max-width:760px){
+  :root{--control-h:36px;--control-py:5px;--control-px:8px}
+  .search-card .grid{grid-template-columns:1fr 1fr;gap:8px}.search-card .grid>div{min-width:0}.search-card input,.search-card select{width:100%;height:34px;min-height:34px;padding:4px 7px;font-size:14px;border-radius:6px}.search-card label{font-size:13px;margin-bottom:3px}.search-card .btns{grid-template-columns:1fr;margin-top:8px}.search-card .btn{padding:9px 10px;font-size:14px}
+  table.list.invoice-list{min-width:520px;font-size:12px}table.list.invoice-list th,table.list.invoice-list td{padding:4px 3px}.invoice-list .col-type{width:82px}.invoice-list .col-date{width:82px}.invoice-list .col-amount{width:82px}.invoice-list .col-action{width:92px}.invoice-list .action-cell{gap:3px}.invoice-list .btn.compact{padding:5px 5px;font-size:11px;border-radius:5px;min-width:36px;text-align:center}
+  .form-compact .grid{grid-template-columns:1fr;gap:8px}.form-compact label{font-size:13px;margin-bottom:3px}.form-compact input,.form-compact select{height:36px;min-height:36px;padding:5px 8px;font-size:14px;border-radius:6px}.form-compact .small-date{max-width:150px}.form-compact .btns{grid-template-columns:1fr 1fr;margin:8px 0}.form-compact .btn{padding:9px 10px;font-size:14px}
+  /* 明細入力はスマホでも1行＝1カード。高さを詰める */
+  #itemsTable tr{padding:8px;margin-bottom:8px}#itemsTable td{padding:3px 0}#itemsTable td::before{font-size:12px;margin-bottom:2px}#itemsTable input,#itemsTable select{height:34px;min-height:34px;padding:4px 7px;font-size:14px;border-radius:6px}#itemsTable .btn.red{padding:7px 10px;font-size:12px;width:auto}.items-actions{display:flex!important}.items-actions .btn{width:auto;padding:9px 12px;font-size:14px}
+}
+
+/* ===== v6 iPhone/search/customer-list refinements ===== */
+.search-card .search-grid{grid-template-columns:1.25fr 1fr 1fr 1fr 1fr;align-items:end}
+.search-card .search-grid>div{min-width:0}
+.search-card input[type="date"],.form-compact input[type="date"]{-webkit-appearance:none;appearance:none;line-height:1.2;min-width:0}
+.customer-register-card{padding:0;overflow:hidden}.section-toggle{width:100%;border:0;background:#fff;text-align:left;font-size:18px;font-weight:700;padding:14px 16px;cursor:pointer}.section-toggle::after{content:'＋';float:right}.customer-register-body{display:none;border-top:1px solid #e5e7eb;padding:16px}.customer-register-body.is-open{display:block}.customer-register-body.is-open + .section-toggle::after{content:'−'}
+.customers-list .btn.compact{padding:6px 9px;font-size:13px;border-radius:6px;line-height:1.1;width:auto;min-width:0}
+@media(max-width:760px){
+  .search-card .search-grid{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:7px 8px;align-items:end}
+  .search-card .search-customer{grid-column:1 / -1;grid-row:1}.search-card .search-date-from{grid-column:1;grid-row:2}.search-card .search-date-to{grid-column:2;grid-row:2}.search-card .search-amount-from{grid-column:1;grid-row:3}.search-card .search-amount-to{grid-column:2;grid-row:3}
+  .search-card .search-grid input{width:100%;max-width:100%;height:34px!important;min-height:34px!important;padding:4px 6px!important;font-size:13px!important;line-height:1.2!important;min-width:0!important}
+  .search-card .search-grid input[type="date"]{font-size:12px!important;padding-left:4px!important;padding-right:2px!important}
+  .search-card .search-grid label{font-size:12px;line-height:1.1;white-space:nowrap}
+  .form-compact input[type="date"],.form-compact .small-date{width:100%;max-width:100%;height:36px!important;min-height:36px!important;padding:5px 8px!important;font-size:14px!important;line-height:1.2!important}
+  .customer-register-card .section-toggle{font-size:16px;padding:12px}.customer-register-body{padding:12px}.customers-list{min-width:520px;font-size:12px}.customers-list th,.customers-list td{padding:4px 3px!important}.customers-list .btn.compact{padding:5px 5px;font-size:11px;border-radius:5px;min-width:36px;text-align:center}
+}
+
+/* ===== v7 document type search / attached invoice layout ===== */
+.search-card .search-grid{grid-template-columns:.9fr 1.3fr 1fr 1fr 1fr 1fr;align-items:end}
+
+.invoice{
+  --text:#172238;--muted:#6c7688;--line:#cfd7e3;--header-bg:#f3f6fa;--accent:#58729b;--panel-bg:#f7f9fc;
+  width:210mm;min-height:297mm;margin:12px auto;padding:16mm 14mm 12mm;background:#fff;color:var(--text);
+  font-family:"Noto Sans JP","Yu Gothic","Meiryo",sans-serif;font-size:14px;line-height:1.6;box-shadow:0 0 0 1px #ddd;
+}
+.invoice .title{margin:0;text-align:center;font-size:26px;font-weight:700;letter-spacing:.25em}
+.invoice .top-line{margin:18px 0 24px;border:0;border-top:3px solid var(--text)}
+.invoice .top-row{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+.invoice .date-text{text-align:right;font-size:15px;margin-bottom:28px;white-space:nowrap}
+.invoice .customer-address,.invoice .company-info,.invoice .contact{font-size:14px}
+.invoice .customer-name{margin:34px 0 18px;padding-bottom:10px;border-bottom:1px solid var(--line);font-size:24px;font-weight:600}
+.invoice .company-area{display:grid;grid-template-columns:max-content 78px;gap:8px;align-items:start;justify-content:end}
+.invoice .company-name{margin-bottom:10px;font-size:17px;font-weight:700}
+.invoice .stamp-img{width:78px;height:78px;margin-top:8px;object-fit:contain;background:transparent;position:static;z-index:auto}
+.invoice .lead{margin:36px 0 20px;font-size:15px}
+.invoice .amount-box-new{width:360px;height:64px;margin-bottom:30px;padding:0 22px;border-radius:7px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:space-between}
+.invoice .amount-label{font-size:15px;font-weight:700}
+.invoice .amount-value{font-size:28px;font-weight:500;letter-spacing:.05em}
+.invoice table{width:100%;border-collapse:collapse}
+.invoice .detail-table{margin-top:4px;font-size:13px}
+.invoice .detail-table th{background:var(--header-bg);font-weight:700;text-align:center;border:1px solid var(--line);border-bottom:2px solid var(--text);padding:8px 6px}
+.invoice .detail-table td{border:1px solid var(--line);padding:8px 6px;vertical-align:middle}
+.invoice .detail-table .date,.invoice .detail-table .type,.invoice .detail-table .note{text-align:center}
+.invoice .detail-table .qty,.invoice .detail-table .price,.invoice .detail-table .amount{text-align:right}
+.invoice .summary-wrap{display:flex;justify-content:flex-end;align-items:flex-start;gap:16px;margin-top:16px}
+.invoice .total-count-box{width:160px;font-size:14px}
+.invoice .total-count-box th,.invoice .total-count-box td{border:1px solid var(--line);padding:7px 9px}
+.invoice .total-count-box th{text-align:left;font-weight:700;white-space:nowrap}
+.invoice .total-count-box td{text-align:right;white-space:nowrap}
+.invoice .summary-table{width:340px;font-size:14px}
+.invoice .summary-table th,.invoice .summary-table td{border:1px solid var(--line);padding:7px 9px}
+.invoice .summary-table th{width:50%;text-align:left;font-weight:700}
+.invoice .summary-table td{text-align:right}
+.invoice .summary-table .grand th,.invoice .summary-table .grand td{background:var(--accent);color:#fff;font-size:16px;font-weight:700}
+.invoice .bank-box{margin:64px auto 0;padding:22px 26px;width:calc(100% - 28px);min-height:108px;border-radius:8px;background:var(--panel-bg);display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;font-size:13px}
+.invoice .bank-title{margin-bottom:10px;font-weight:700;font-size:15px}
+.invoice .bank-note{color:var(--muted);white-space:nowrap}
+.invoice .footer{margin-top:42px;padding-top:16px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:12px}
+.items-actions{display:flex!important;flex-direction:row!important;align-items:center;gap:10px}.items-actions .btn{width:auto!important;min-width:110px}
+@media(max-width:760px){
+  .search-card .search-grid{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:7px 8px;align-items:end}
+  .search-card .search-doc-type{grid-column:1 / -1;grid-row:1}.search-card .search-customer{grid-column:1 / -1;grid-row:2}.search-card .search-date-from{grid-column:1;grid-row:3}.search-card .search-date-to{grid-column:2;grid-row:3}.search-card .search-amount-from{grid-column:1;grid-row:4}.search-card .search-amount-to{grid-column:2;grid-row:4}
+  .items-actions{display:flex!important;flex-direction:row!important;gap:8px}.items-actions .btn{width:auto!important;min-width:96px;padding:9px 12px;font-size:14px}
+  .print-card{overflow-x:auto!important;-webkit-overflow-scrolling:touch}.invoice{width:794px;min-height:auto;margin:10px 0;padding:50px 44px 38px;box-shadow:0 0 0 1px #ddd;font-size:13px}.invoice .title{font-size:24px}.invoice .amount-box-new{width:330px}.invoice .bank-box{margin-top:48px}.invoice .stamp-img{width:72px;height:72px}
+}
+@media print{
+  .invoice{position:absolute;left:0;top:0;width:210mm!important;height:297mm!important;min-height:0!important;margin:0!important;padding:16mm 14mm 12mm!important;box-shadow:none!important;overflow:hidden!important;page-break-after:avoid;break-after:avoid;font-size:12px!important;background:#fff!important;color:#172238!important}
+  .invoice .title{font-size:24px!important;margin:0!important}.invoice .top-line{margin:14px 0 18px!important}.invoice .top-row{grid-template-columns:1fr 1fr!important;gap:22px!important}.invoice .customer-name{font-size:22px!important;margin:26px 0 14px!important}.invoice .lead{margin:28px 0 16px!important}.invoice .amount-box-new{width:340px!important;height:58px!important;margin-bottom:22px!important}.invoice .amount-value{font-size:26px!important}.invoice .detail-table{font-size:12px!important}.invoice .detail-table th,.invoice .detail-table td{padding:6px 5px!important}.invoice .summary-wrap{margin-top:14px!important}.invoice .bank-box{margin-top:42px!important;min-height:94px!important;padding:18px 22px!important}.invoice .footer{margin-top:32px!important}.invoice .stamp-img{width:76px!important;height:76px!important}
+}
+
+
+/* ===== v8 smartphone scaled invoice preview / customer sorting version ===== */
+@media screen and (max-width:760px){
+  .print-card{
+    position:relative!important;
+    overflow:hidden!important;
+    padding:8px 0!important;
+    background:transparent!important;
+  }
+  .print-card .invoice{
+    width:210mm!important;
+    min-height:297mm!important;
+    margin:0!important;
+    padding:16mm 14mm 12mm!important;
+    transform-origin:top center!important;
+    position:relative!important;
+    left:50%!important;
+    box-shadow:0 0 0 1px #ddd!important;
+    font-size:14px!important;
+  }
+  .print-card .invoice .title{font-size:26px!important}
+  .print-card .invoice .amount-box-new{width:360px!important;height:64px!important}
+  .print-card .invoice .bank-box{margin-top:64px!important}
+  .print-card .invoice .stamp-img{width:78px!important;height:78px!important}
+}
+@media screen and (min-width:481px) and (max-width:760px){
+  .print-card{height:780px!important}
+  .print-card .invoice{transform:translateX(-50%) scale(.68)!important}
+}
+@media screen and (max-width:480px){
+  .print-card{height:510px!important}
+  .print-card .invoice{transform:translateX(-50%) scale(.44)!important}
+}
+@media screen and (max-width:380px){
+  .print-card{height:490px!important}
+  .print-card .invoice{transform:translateX(-50%) scale(.42)!important}
+}
+
+/* ===== v12 grade dropdown / simplified item type ===== */
+.detail-heading{font-size:18px;margin:14px 0 8px}
+#itemsTable .disabled-input{background:#f3f4f6;color:#777}
+@media(min-width:761px){#itemsTable{min-width:900px}}
+
+/* ===== v10 main menu / compact top navigation ===== */
+.menu-card{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+.menu-tile{
+  display:block;
+  padding:22px 18px;
+  border:1px solid #d1d5db;
+  border-radius:12px;
+  background:#fff;
+  color:#111;
+  text-decoration:none;
+  box-shadow:0 2px 8px rgba(0,0,0,.04);
+}
+.menu-tile__title{
+  display:block;
+  font-size:20px;
+  font-weight:700;
+  margin-bottom:6px;
+}
+.menu-tile__desc{
+  display:block;
+  color:#6b7280;
+  font-size:14px;
+}
+@media(max-width:760px){
+  .topbar nav{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:5px!important;
+    margin-top:8px!important;
+  }
+  .topbar a{
+    display:block!important;
+    margin:0!important;
+    padding:6px 4px!important;
+    font-size:12px!important;
+    line-height:1.15!important;
+    border-radius:5px!important;
+    text-align:center!important;
+    white-space:nowrap!important;
+  }
+  .menu-card{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+  .menu-tile{
+    padding:16px 14px;
+  }
+  .menu-tile__title{
+    font-size:18px;
+  }
+}
+
+/* ===== v12 grade dropdown / simplified item type ===== */
+#itemsTable select[name="rank_name[]"]{min-width:86px}
+
+
+/* ===== v13 invoice detail full display / no blank final print page ===== */
+.invoice .detail-table th,
+.invoice .detail-table td{
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+.invoice .detail-table tr,
+.invoice .summary-wrap,
+.invoice .bank-box,
+.invoice .footer{
+  break-inside:avoid;
+  page-break-inside:avoid;
+}
+
+@media screen and (max-width:760px){
+  /* 縮小プレビューの下部が切れないよう、固定高さ＋隠す指定を解除 */
+  .print-card{
+    height:auto!important;
+    min-height:0!important;
+    overflow:visible!important;
+    padding-bottom:18px!important;
+  }
+  .print-card .invoice{
+    height:auto!important;
+    min-height:297mm!important;
+    overflow:visible!important;
+  }
+}
+@media screen and (min-width:481px) and (max-width:760px){
+  .print-card{min-height:780px!important}
+}
+@media screen and (max-width:480px){
+  .print-card{min-height:530px!important}
+}
+@media screen and (max-width:380px){
+  .print-card{min-height:510px!important}
+}
+
+@media print{
+  @page{size:A4;margin:0}
+  html,body{
+    width:210mm!important;
+    height:auto!important;
+    min-height:0!important;
+    margin:0!important;
+    padding:0!important;
+    background:#fff!important;
+    overflow:visible!important;
+  }
+  .container{
+    width:210mm!important;
+    height:auto!important;
+    min-height:0!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:visible!important;
+  }
+  .print-card{
+    position:static!important;
+    left:auto!important;
+    top:auto!important;
+    width:210mm!important;
+    height:auto!important;
+    min-height:0!important;
+    margin:0!important;
+    padding:0!important;
+    border:0!important;
+    box-shadow:none!important;
+    overflow:visible!important;
+    background:#fff!important;
+    page-break-after:auto!important;
+    break-after:auto!important;
+  }
+  .print-card .invoice,
+  .invoice{
+    position:static!important;
+    left:auto!important;
+    top:auto!important;
+    width:210mm!important;
+    height:auto!important;
+    min-height:0!important;
+    margin:0!important;
+    padding:14mm 14mm 10mm!important;
+    box-shadow:none!important;
+    overflow:visible!important;
+    transform:none!important;
+    page-break-after:auto!important;
+    break-after:auto!important;
+    font-size:12px!important;
+    background:#fff!important;
+    color:#172238!important;
+  }
+  .invoice .detail-table{font-size:11.5px!important}
+  .invoice .detail-table th,
+  .invoice .detail-table td{padding:5px 4px!important}
+  .invoice .bank-box{margin-top:24px!important}
+  .invoice .footer{margin-top:20px!important}
+}
+
+
+/* ===== v14 print title visibility fix ===== */
+@media print{
+  .print-card .invoice .title,
+  .invoice .title{
+    display:block!important;
+    visibility:visible!important;
+  }
+}
+
+
+/* ===== receipt system v20 alignment with invoice_system ===== */
+.receipt-list .col-date{width:112px}.receipt-list .col-amount{width:100px}.receipt-list .col-action{width:150px}.receipt-list .action-cell{white-space:nowrap;display:flex;gap:6px;align-items:center}
+.receipt-list .btn.compact{padding:6px 9px;font-size:13px;border-radius:6px;line-height:1.1;width:auto;min-width:0}
+.receipt-search-card .grid{grid-template-columns:1.4fr .8fr .8fr .8fr .8fr;align-items:end}
+.receipt-form-card .grid{grid-template-columns:1.2fr .7fr 1fr .7fr;align-items:end}
+.receipt-form-card .wide{grid-column:1 / -1}.receipt-form-card textarea{min-height:64px}.receipt-form-card .readonly{background:#f9fafb}
+.receipt-form-card input,.receipt-form-card select,.receipt-form-card textarea,.receipt-search-card input,.receipt-search-card select{height:38px;padding:6px 9px;font-size:15px}.receipt-form-card textarea{height:auto;min-height:72px}.receipt-form-card label,.receipt-search-card label{font-size:14px}.receipt-form-card .small-date,.receipt-search-card .small-date{max-width:145px}
+/* 領収証レイアウト */
+.receipt-print-card{background:transparent;border:0;box-shadow:none;padding:0}.receipt-sheet{width:794px;min-height:520px;background:#fff;margin:12px auto;padding:36px 46px;color:#111;font-family:"Yu Gothic","Meiryo",sans-serif;box-shadow:0 0 0 1px #ddd;position:relative;overflow:hidden}.receipt-border{position:absolute;inset:14px;border:1px solid #777;pointer-events:none}.receipt-corner{position:absolute;width:52px;height:52px;border-color:#999;opacity:.65}.receipt-corner.tl{left:20px;top:20px;border-top:3px double #aaa;border-left:3px double #aaa;border-top-left-radius:36px}.receipt-corner.tr{right:20px;top:20px;border-top:3px double #aaa;border-right:3px double #aaa;border-top-right-radius:36px}.receipt-corner.bl{left:20px;bottom:20px;border-bottom:3px double #aaa;border-left:3px double #aaa;border-bottom-left-radius:36px}.receipt-corner.br{right:20px;bottom:20px;border-bottom:3px double #aaa;border-right:3px double #aaa;border-bottom-right-radius:36px}.receipt-title{text-align:center;font-size:28px;letter-spacing:12px;font-weight:700;margin:0 0 24px}.receipt-meta{position:absolute;right:52px;top:48px;text-align:right;font-size:13px;line-height:1.8}.receipt-customer{font-size:19px;border-bottom:1px solid #111;width:380px;padding:0 0 6px;margin:28px 0 26px 28px}.receipt-amount{font-size:24px;font-weight:700;border-bottom:2px solid #111;width:520px;padding:0 0 8px;margin:0 0 28px 90px}.receipt-desc{font-size:15px;line-height:1.7;min-height:48px;width:520px;margin:0 0 12px 90px;white-space:pre-wrap}.receipt-text{font-size:14px;margin:0 0 14px 90px}.receipt-breakdown{font-size:13px;line-height:1.9;margin:0 0 0 90px}.receipt-company{position:absolute;right:72px;bottom:58px;width:310px;font-size:12px;line-height:1.65}.receipt-company .company-name{font-size:18px;font-weight:700;margin-bottom:2px}.receipt-stamp{position:absolute;right:76px;bottom:104px;width:86px;height:86px;object-fit:contain;opacity:.9;z-index:2}.receipt-note{font-size:13px;color:#555;margin-top:10px}
+@media(max-width:760px){
+  .receipt-search-card .grid{grid-template-columns:1fr 1fr;gap:8px}.receipt-form-card .grid{grid-template-columns:1fr;gap:8px}.receipt-search-card .grid>div,.receipt-form-card .grid>div{min-width:0}.receipt-form-card .small-date,.receipt-search-card .small-date{max-width:150px}.receipt-form-card input,.receipt-form-card select,.receipt-form-card textarea,.receipt-search-card input,.receipt-search-card select{width:100%;height:34px;min-height:34px;padding:4px 7px;font-size:14px;border-radius:6px}.receipt-form-card textarea{height:auto;min-height:62px}.receipt-form-card label,.receipt-search-card label{font-size:13px;margin-bottom:3px}.receipt-search-card .btns,.receipt-form-card .btns{grid-template-columns:1fr;margin-top:8px}.receipt-search-card .btn,.receipt-form-card .btn{padding:9px 10px;font-size:14px}
+  table.list.receipt-list{min-width:620px;font-size:12px}table.list.receipt-list th,table.list.receipt-list td{padding:4px 3px}.receipt-list .col-date{width:82px}.receipt-list .col-amount{width:82px}.receipt-list .col-action{width:115px}.receipt-list .action-cell{gap:3px}.receipt-list .btn.compact{padding:5px 5px;font-size:11px;border-radius:5px;min-width:34px;text-align:center}
+  .receipt-print-card{overflow-x:hidden}.receipt-sheet{width:100%;min-width:0;min-height:0;margin:10px 0;padding:28px 16px 34px;box-shadow:0 0 0 1px #ddd;font-size:10px}.receipt-border{inset:8px}.receipt-title{font-size:20px;letter-spacing:8px;margin-bottom:16px}.receipt-meta{right:24px;top:34px;font-size:10px}.receipt-customer{font-size:15px;width:54%;margin:24px 0 18px 12px}.receipt-amount{font-size:18px;width:70%;margin-left:36px}.receipt-desc,.receipt-text,.receipt-breakdown{margin-left:36px;width:70%;font-size:11px}.receipt-company{position:relative;right:auto;bottom:auto;width:auto;margin:24px 0 0 46%;font-size:9px}.receipt-company .company-name{font-size:12px}.receipt-stamp{right:16px;bottom:62px;width:54px;height:54px}
+}
+@media print{.receipt-print-card{position:static!important;left:auto!important;top:auto!important;width:210mm!important;height:auto!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important;overflow:visible!important;background:#fff!important;page-break-after:auto!important;break-after:auto!important}.receipt-sheet{position:static!important;width:210mm!important;min-height:120mm!important;margin:0!important;padding:12mm 14mm!important;box-shadow:none!important;overflow:hidden!important;page-break-after:auto!important;break-after:auto!important}.receipt-title{font-size:22px!important;margin-bottom:12mm!important}.receipt-meta{right:18mm!important;top:14mm!important}.receipt-customer{font-size:16px!important;width:100mm!important;margin:10mm 0 8mm 10mm!important}.receipt-amount{font-size:20px!important;width:126mm!important;margin:0 0 8mm 22mm!important}.receipt-desc{font-size:13px!important;width:128mm!important;margin-left:22mm!important}.receipt-text{font-size:12px!important;margin-left:22mm!important}.receipt-breakdown{font-size:11px!important;margin-left:22mm!important}.receipt-company{right:22mm!important;bottom:18mm!important;width:82mm!important;font-size:10px!important}.receipt-company .company-name{font-size:14px!important}.receipt-stamp{right:23mm!important;bottom:33mm!important;width:22mm!important;height:22mm!important}.receipt-border{inset:6mm!important}}
+
+
+/* ===== receipt v21 layout / numbering search refinement ===== */
+.receipt-search-card .grid{grid-template-columns:1.15fr .9fr .72fr .72fr .72fr .72fr;align-items:end}
+.receipt-sheet{
+  width:794px;
+  min-height:0;
+  height:560px;
+  padding:34px 46px 26px;
+  border-top:5px double #27364a;
+  border-bottom:1px solid #aeb7c4;
+}
+.receipt-border{inset:14px;border:1px solid #9aa7b8;border-top:0;border-bottom:0}
+.receipt-corner{display:none!important}
+.receipt-title{font-size:27px;margin:0 0 18px;border-bottom:1px solid #d7dee8;padding-bottom:8px}
+.receipt-meta{right:54px;top:44px}
+.receipt-customer{margin:20px 0 18px 28px}
+.receipt-amount{margin:0 0 22px 90px}
+.receipt-desc{min-height:38px;margin-bottom:12px}
+.receipt-lower-row{display:grid;grid-template-columns:1fr 330px;gap:20px;align-items:start;margin:0 0 0 90px;width:650px}
+.receipt-left-info{min-width:0}.receipt-text{margin:0 0 10px 0}.receipt-breakdown{margin:0;font-size:13px;line-height:1.85}
+.receipt-company-wrap{display:grid;grid-template-columns:1fr 84px;gap:10px;align-items:start}.receipt-company{position:static!important;width:auto!important;font-size:12px;line-height:1.62}.receipt-company .company-name{font-size:17px;font-weight:700;margin-bottom:3px}.receipt-stamp{position:static!important;width:78px!important;height:78px!important;object-fit:contain;opacity:.9;align-self:start;margin-top:4px}
+@media(max-width:760px){
+  .receipt-search-card .grid{grid-template-columns:1fr 1fr;gap:8px}.receipt-search-card .grid>div:first-child,.receipt-search-card .grid>div:nth-child(2){grid-column:1 / -1}
+  .receipt-sheet{width:100%;height:auto;min-height:0;margin:10px 0;padding:28px 16px 30px}.receipt-title{font-size:20px}.receipt-meta{right:22px;top:34px}.receipt-lower-row{display:block;width:auto;margin-left:36px}.receipt-company-wrap{margin-top:14px;grid-template-columns:1fr 58px}.receipt-company{font-size:9px!important}.receipt-company .company-name{font-size:12px!important}.receipt-stamp{width:52px!important;height:52px!important}
+}
+@media print{
+  @page{size:A4;margin:0}
+  .receipt-print-card{width:210mm!important;height:auto!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important;background:#fff!important;overflow:visible!important}
+  .receipt-sheet{position:static!important;width:210mm!important;height:145mm!important;min-height:0!important;margin:0!important;padding:11mm 13mm 9mm!important;box-shadow:none!important;overflow:hidden!important;border-top:5px double #27364a!important;border-bottom:1px solid #aeb7c4!important;page-break-after:avoid!important;break-after:avoid!important}
+  .receipt-border{inset:5mm!important;border:1px solid #9aa7b8!important;border-top:0!important;border-bottom:0!important}.receipt-corner{display:none!important}.receipt-title{font-size:22px!important;margin-bottom:8mm!important;padding-bottom:3mm!important}.receipt-meta{right:16mm!important;top:12mm!important}.receipt-customer{font-size:16px!important;width:100mm!important;margin:8mm 0 7mm 10mm!important}.receipt-amount{font-size:20px!important;width:126mm!important;margin:0 0 7mm 22mm!important}.receipt-desc{font-size:13px!important;width:128mm!important;min-height:12mm!important;margin-left:22mm!important;margin-bottom:4mm!important}.receipt-lower-row{display:grid!important;grid-template-columns:1fr 82mm!important;gap:6mm!important;width:auto!important;margin-left:22mm!important;margin-right:6mm!important}.receipt-text{font-size:12px!important;margin:0 0 3mm 0!important}.receipt-breakdown{font-size:11px!important;margin:0!important}.receipt-company{font-size:10px!important;line-height:1.55!important}.receipt-company .company-name{font-size:14px!important}.receipt-company-wrap{grid-template-columns:1fr 22mm!important;gap:3mm!important}.receipt-stamp{width:22mm!important;height:22mm!important;margin-top:2mm!important}
+}
+
+
+/* =========================================================
+   receipt_system final overrides 20260718-02
+   確定仕様：A4横・上半分、角装飾なし、検索項目4つ、請求書システム寄せ
+   ========================================================= */
+.receipt-corner{display:none!important;}
+.receipt-search-card .search-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important;align-items:end!important;}
+.receipt-search-card input.small-date,.receipt-form-card input.small-date{max-width:none!important;width:100%!important;min-width:0!important;}
+.receipt-form-card input,.receipt-form-card select,.receipt-form-card textarea,.receipt-search-card input,.receipt-search-card select{height:38px!important;padding:6px 9px!important;font-size:15px!important;}
+.receipt-form-card textarea{height:auto!important;min-height:72px!important;}
+.receipt-form-card label,.receipt-search-card label{font-size:14px!important;}
+.table-wrap table.list.receipt-list{border-collapse:collapse!important;}
+table.list.receipt-list th,table.list.receipt-list td{border:1px solid #cfd6df!important;}
+table.list.receipt-list th{background:#eef2f7!important;}
+.receipt-print-card{background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;}
+.receipt-sheet{width:980px!important;min-height:378px!important;height:auto!important;background:#fff!important;margin:12px auto!important;padding:30px 42px 28px!important;color:#111!important;font-family:"Yu Gothic","Meiryo",sans-serif!important;box-shadow:0 0 0 1px #cfd6df!important;position:relative!important;overflow:hidden!important;border-top:5px double #27364a!important;border-bottom:1px solid #aeb7c4!important;}
+.receipt-border{position:absolute!important;inset:16px!important;border:1px solid #9aa7b8!important;border-top:0!important;border-bottom:0!important;pointer-events:none!important;}
+.receipt-title{text-align:center!important;font-size:27px!important;letter-spacing:12px!important;font-weight:700!important;margin:0 0 20px!important;padding-bottom:10px!important;border-bottom:3px double #27364a!important;}
+.receipt-meta{position:absolute!important;right:52px!important;top:44px!important;text-align:right!important;font-size:13px!important;line-height:1.8!important;}
+.receipt-customer{font-size:19px!important;border-bottom:1px solid #111!important;width:430px!important;padding:0 0 5px!important;margin:18px 0 18px 20px!important;}
+.receipt-amount{font-size:24px!important;font-weight:700!important;border-bottom:2px solid #111!important;width:520px!important;padding:0 0 7px!important;margin:0 0 18px 58px!important;}
+.receipt-desc{font-size:14px!important;line-height:1.5!important;min-height:32px!important;width:520px!important;margin:0 0 10px 58px!important;white-space:pre-wrap!important;}
+.receipt-lower-row{display:grid!important;grid-template-columns:1fr 360px!important;gap:24px!important;width:auto!important;margin:0 28px 0 58px!important;align-items:start!important;}
+.receipt-left-info{min-width:0!important;}
+.receipt-text{font-size:13px!important;margin:0 0 10px 0!important;}
+.receipt-breakdown{font-size:12px!important;line-height:1.65!important;margin:0!important;}
+.receipt-company-wrap{display:grid!important;grid-template-columns:1fr 78px!important;gap:10px!important;align-items:start!important;}
+.receipt-company{position:static!important;width:auto!important;font-size:11px!important;line-height:1.55!important;}
+.receipt-company .company-name{font-size:16px!important;font-weight:700!important;margin-bottom:2px!important;}
+.receipt-stamp{position:static!important;width:76px!important;height:76px!important;object-fit:contain!important;opacity:.92!important;margin-top:2px!important;}
+@media (max-width:768px){
+  .receipt-search-card .search-grid{grid-template-columns:1fr!important;gap:8px!important;}
+  .receipt-form-card .grid{grid-template-columns:1fr!important;gap:8px!important;}
+  .receipt-search-card .grid>div,.receipt-form-card .grid>div{min-width:0!important;}
+  .receipt-form-card input,.receipt-form-card select,.receipt-form-card textarea,.receipt-search-card input,.receipt-search-card select{width:100%!important;max-width:none!important;height:34px!important;min-height:34px!important;padding:4px 7px!important;font-size:14px!important;border-radius:6px!important;}
+  .receipt-form-card textarea{height:auto!important;min-height:62px!important;}
+  .receipt-form-card label,.receipt-search-card label{font-size:13px!important;margin-bottom:3px!important;}
+  table.list.receipt-list{min-width:620px!important;font-size:12px!important;}
+  table.list.receipt-list th,table.list.receipt-list td{padding:4px 3px!important;}
+  .receipt-print-card{overflow-x:auto!important;-webkit-overflow-scrolling:touch!important;}
+  .receipt-sheet{width:980px!important;min-height:378px!important;margin:10px 0!important;}
+}
+@media print{
+  @page{size:A4 landscape!important;margin:0!important;}
+  body{background:#fff!important;}
+  .no-print,.topbar,.print-hide{display:none!important;}
+  .container{max-width:none!important;margin:0!important;padding:0!important;}
+  .receipt-print-card{position:static!important;width:297mm!important;height:105mm!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important;overflow:hidden!important;background:#fff!important;page-break-after:avoid!important;break-after:avoid!important;}
+  .receipt-sheet{position:static!important;width:260mm!important;height:100mm!important;min-height:0!important;margin:0 auto!important;padding:8mm 11mm 7mm!important;box-shadow:none!important;overflow:hidden!important;border-top:5px double #27364a!important;border-bottom:1px solid #aeb7c4!important;page-break-after:avoid!important;break-after:avoid!important;}
+  .receipt-border{inset:4mm!important;border:1px solid #9aa7b8!important;border-top:0!important;border-bottom:0!important;}
+  .receipt-title{font-size:20px!important;letter-spacing:9px!important;margin:0 0 5mm!important;padding-bottom:2.5mm!important;}
+  .receipt-meta{right:13mm!important;top:9mm!important;font-size:10px!important;}
+  .receipt-customer{font-size:14px!important;width:105mm!important;margin:5mm 0 5mm 7mm!important;padding-bottom:1.5mm!important;}
+  .receipt-amount{font-size:18px!important;width:125mm!important;margin:0 0 5mm 16mm!important;padding-bottom:1.8mm!important;}
+  .receipt-desc{font-size:11px!important;line-height:1.45!important;min-height:8mm!important;width:125mm!important;margin:0 0 3mm 16mm!important;}
+  .receipt-lower-row{display:grid!important;grid-template-columns:1fr 82mm!important;gap:5mm!important;margin:0 4mm 0 16mm!important;}
+  .receipt-text{font-size:10px!important;margin:0 0 2mm 0!important;}
+  .receipt-breakdown{font-size:9.5px!important;line-height:1.55!important;}
+  .receipt-company-wrap{grid-template-columns:1fr 20mm!important;gap:2.5mm!important;}
+  .receipt-company{font-size:8.8px!important;line-height:1.45!important;}
+  .receipt-company .company-name{font-size:12px!important;}
+  .receipt-stamp{width:19mm!important;height:19mm!important;margin-top:1mm!important;}
+}
+
+/* =========================================================
+   receipt_system layout import 20260719-01
+   添付レイアウト準拠：外枠二重線、金額枠、内訳表、会社情報＋実印
+   ========================================================= */
+.receipt-sheet.receipt-layout-classic{
+  width:980px!important;
+  height:690px!important;
+  min-height:0!important;
+  margin:12px auto!important;
+  padding:0!important;
+  background:#fff!important;
+  color:#111!important;
+  font-family:"Yu Mincho","Hiragino Mincho ProN","Yu Gothic","Meiryo",serif!important;
+  position:relative!important;
+  overflow:hidden!important;
+  border:none!important;
+  box-shadow:0 0 0 1px #ddd!important;
+}
+.receipt-layout-classic .classic-frame{
+  position:absolute;
+  inset:18px;
+  border:4px double #111;
+  pointer-events:none;
+}
+.receipt-layout-classic .classic-title{
+  position:absolute;
+  top:66px;
+  left:0;
+  right:0;
+  margin:0!important;
+  padding:0 0 10px!important;
+  border:0!important;
+  text-align:center!important;
+  font-size:42px!important;
+  font-weight:700!important;
+  letter-spacing:12px!important;
+  line-height:1!important;
+}
+.receipt-layout-classic .classic-title::after{
+  content:"";
+  display:block;
+  width:210px;
+  height:6px;
+  border-top:2px solid #111;
+  border-bottom:2px solid #111;
+  margin:12px auto 0;
+}
+.receipt-layout-classic .classic-meta{
+  position:absolute!important;
+  top:72px!important;
+  right:74px!important;
+  width:260px!important;
+  text-align:right!important;
+  font-family:"Yu Mincho","Hiragino Mincho ProN",serif!important;
+  font-size:20px!important;
+  line-height:2.2!important;
+}
+.receipt-layout-classic .classic-no{
+  white-space:nowrap;
+}
+.receipt-layout-classic .classic-no span{
+  display:inline-block;
+  min-width:145px;
+  border-bottom:1px solid #111;
+  text-align:center;
+  line-height:1.15;
+}
+.receipt-layout-classic .classic-date{
+  margin-top:18px;
+  font-size:20px!important;
+  letter-spacing:2px;
+}
+.receipt-layout-classic .classic-date span{
+  display:inline-block;
+  min-width:36px;
+  text-align:center;
+}
+.receipt-layout-classic .classic-customer{
+  position:absolute;
+  left:70px;
+  top:205px;
+  width:490px;
+  border-bottom:2px solid #111;
+  height:38px;
+  font-size:22px;
+  line-height:33px;
+  text-align:left;
+}
+.receipt-layout-classic .classic-customer span{
+  display:inline-block;
+  max-width:410px;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+.receipt-layout-classic .classic-customer b{
+  float:right;
+  font-size:30px;
+  font-weight:700;
+  line-height:30px;
+}
+.receipt-layout-classic .classic-amount-row{
+  position:absolute;
+  left:139px;
+  top:282px;
+  display:grid;
+  grid-template-columns:105px 610px;
+  column-gap:32px;
+  align-items:center;
+}
+.receipt-layout-classic .classic-amount-label{
+  font-size:34px;
+  font-weight:700;
+  letter-spacing:2px;
+}
+.receipt-layout-classic .classic-amount-box{
+  width:610px;
+  height:74px;
+  border:2px solid #111;
+  display:grid;
+  grid-template-columns:88px 1fr 60px;
+  align-items:center;
+  background:#fff;
+}
+.receipt-layout-classic .classic-yen{
+  font-size:40px;
+  font-weight:700;
+  text-align:center;
+}
+.receipt-layout-classic .classic-amount-value{
+  font-family:"Yu Gothic","Meiryo",sans-serif;
+  font-size:34px;
+  font-weight:700;
+  text-align:center;
+  letter-spacing:2px;
+}
+.receipt-layout-classic .classic-currency{
+  font-size:28px;
+  font-weight:700;
+  text-align:center;
+}
+.receipt-layout-classic .classic-description{
+  position:absolute;
+  left:139px;
+  top:410px;
+  width:740px;
+  display:grid;
+  grid-template-columns:60px 1fr;
+  column-gap:0;
+  font-size:24px;
+  align-items:start;
+}
+.receipt-layout-classic .classic-description>span{
+  font-weight:600;
+  line-height:36px;
+}
+.receipt-layout-classic .classic-description>div{
+  min-height:36px;
+  border-bottom:2px solid #111;
+  padding:2px 10px 4px;
+  line-height:1.35;
+  font-size:19px;
+  white-space:pre-wrap;
+  overflow:hidden;
+}
+.receipt-layout-classic .classic-received-text{
+  position:absolute;
+  left:139px;
+  top:492px;
+  font-size:21px;
+  letter-spacing:1px;
+}
+.receipt-layout-classic .classic-bottom{
+  position:absolute;
+  left:68px;
+  right:68px;
+  bottom:58px;
+  display:grid;
+  grid-template-columns:420px 1fr;
+  column-gap:88px;
+  align-items:start;
+}
+.receipt-layout-classic .classic-section-title{
+  font-size:20px;
+  line-height:1.3;
+  margin:0 0 6px 10px;
+}
+.receipt-layout-classic .classic-breakdown table{
+  width:392px;
+  border-collapse:collapse!important;
+  font-size:17px;
+  border:1px solid #111;
+  background:#fff;
+}
+.receipt-layout-classic .classic-breakdown th,
+.receipt-layout-classic .classic-breakdown td{
+  border:1px solid #111!important;
+  padding:9px 10px!important;
+  height:43px;
+  background:#fff!important;
+  color:#111!important;
+  font-weight:400;
+  white-space:nowrap;
+}
+.receipt-layout-classic .classic-breakdown th{
+  width:175px;
+  text-align:left;
+}
+.receipt-layout-classic .classic-breakdown td:nth-child(2){
+  width:170px;
+  text-align:right;
+  font-family:"Yu Gothic","Meiryo",sans-serif;
+}
+.receipt-layout-classic .classic-yen-cell{
+  width:42px;
+  text-align:center!important;
+}
+.receipt-layout-classic .classic-tax-note{
+  margin:30px 0 0 0;
+  font-size:16px;
+  line-height:1.4;
+}
+.receipt-layout-classic .classic-company-area{
+  position:relative;
+  min-height:190px;
+  padding:6px 92px 0 0;
+}
+.receipt-layout-classic .classic-company-info{
+  font-size:16px;
+  line-height:1.65;
+  font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
+}
+.receipt-layout-classic .classic-company-name{
+  font-size:26px;
+  font-weight:700;
+  margin:0 0 8px;
+  letter-spacing:2px;
+}
+.receipt-layout-classic .classic-stamp{
+  position:absolute!important;
+  right:0!important;
+  bottom:8px!important;
+  width:82px!important;
+  height:82px!important;
+  object-fit:contain!important;
+  opacity:.92!important;
+  z-index:2!important;
+}
+@media(max-width:768px){
+  .receipt-print-card{overflow-x:auto!important;-webkit-overflow-scrolling:touch!important;}
+  .receipt-sheet.receipt-layout-classic{width:980px!important;height:690px!important;margin:10px 0!important;}
+}
+@media print{
+  @page{size:A4 landscape!important;margin:0!important;}
+  body{background:#fff!important;}
+  .no-print,.topbar,.print-hide{display:none!important;}
+  .container{max-width:none!important;margin:0!important;padding:0!important;}
+  .receipt-print-card{position:static!important;width:297mm!important;height:105mm!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important;overflow:hidden!important;background:#fff!important;page-break-after:avoid!important;break-after:avoid!important;}
+  .receipt-sheet.receipt-layout-classic{width:260mm!important;height:100mm!important;margin:0 auto!important;padding:0!important;transform-origin:top center!important;box-shadow:none!important;overflow:hidden!important;border:0!important;}
+  .receipt-layout-classic .classic-frame{inset:2.5mm!important;border:1.1mm double #111!important;}
+  .receipt-layout-classic .classic-title{top:8mm!important;font-size:11.5mm!important;letter-spacing:2.8mm!important;padding-bottom:2mm!important;}
+  .receipt-layout-classic .classic-title::after{width:38mm!important;height:1.4mm!important;border-top:.45mm solid #111!important;border-bottom:.45mm solid #111!important;margin:2.2mm auto 0!important;}
+  .receipt-layout-classic .classic-meta{top:9mm!important;right:13mm!important;width:52mm!important;font-size:4mm!important;line-height:1.9!important;}
+  .receipt-layout-classic .classic-no span{min-width:29mm!important;}
+  .receipt-layout-classic .classic-date{margin-top:3.2mm!important;font-size:4mm!important;}
+  .receipt-layout-classic .classic-date span{min-width:7mm!important;}
+  .receipt-layout-classic .classic-customer{left:13mm!important;top:29mm!important;width:90mm!important;height:7.5mm!important;font-size:4.2mm!important;line-height:7mm!important;border-bottom:.45mm solid #111!important;}
+  .receipt-layout-classic .classic-customer b{font-size:6mm!important;line-height:6.5mm!important;}
+  .receipt-layout-classic .classic-amount-row{left:36mm!important;top:41mm!important;grid-template-columns:20mm 116mm!important;column-gap:8mm!important;}
+  .receipt-layout-classic .classic-amount-label{font-size:7mm!important;}
+  .receipt-layout-classic .classic-amount-box{width:116mm!important;height:14mm!important;border:.45mm solid #111!important;grid-template-columns:18mm 1fr 12mm!important;}
+  .receipt-layout-classic .classic-yen{font-size:8mm!important;}
+  .receipt-layout-classic .classic-amount-value{font-size:7.3mm!important;}
+  .receipt-layout-classic .classic-currency{font-size:6mm!important;}
+  .receipt-layout-classic .classic-description{left:36mm!important;top:60mm!important;width:178mm!important;grid-template-columns:12mm 1fr!important;font-size:5mm!important;}
+  .receipt-layout-classic .classic-description>span{line-height:7mm!important;}
+  .receipt-layout-classic .classic-description>div{min-height:7mm!important;font-size:3.8mm!important;padding:.5mm 2mm .8mm!important;border-bottom:.45mm solid #111!important;}
+  .receipt-layout-classic .classic-received-text{left:36mm!important;top:71mm!important;font-size:4.1mm!important;}
+  .receipt-layout-classic .classic-bottom{left:14mm!important;right:14mm!important;bottom:8mm!important;grid-template-columns:74mm 1fr!important;column-gap:26mm!important;}
+  .receipt-layout-classic .classic-section-title{font-size:4mm!important;margin:0 0 1mm 3mm!important;}
+  .receipt-layout-classic .classic-breakdown table{width:74mm!important;font-size:3.5mm!important;border:.35mm solid #111!important;}
+  .receipt-layout-classic .classic-breakdown th,.receipt-layout-classic .classic-breakdown td{height:7.5mm!important;padding:1.5mm 2mm!important;border:.35mm solid #111!important;}
+  .receipt-layout-classic .classic-breakdown th{width:34mm!important;}
+  .receipt-layout-classic .classic-breakdown td:nth-child(2){width:32mm!important;}
+  .receipt-layout-classic .classic-yen-cell{width:8mm!important;}
+  .receipt-layout-classic .classic-tax-note{font-size:3mm!important;margin:5mm 0 0 0!important;}
+  .receipt-layout-classic .classic-company-area{min-height:34mm!important;padding:1mm 20mm 0 0!important;}
+  .receipt-layout-classic .classic-company-info{font-size:3.1mm!important;line-height:1.55!important;}
+  .receipt-layout-classic .classic-company-name{font-size:5.2mm!important;margin:0 0 1mm!important;}
+  .receipt-layout-classic .classic-stamp{right:0!important;bottom:1mm!important;width:17mm!important;height:17mm!important;}
+}

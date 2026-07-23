@@ -1,0 +1,2 @@
+<?php require_once __DIR__ . '/auth.php'; require_login(); ?>
+<div class="topbar no-print"><div class="topbar__inner"><div><strong>領収書管理</strong></div><nav><a href="<?=business_url('receipt_system/receipt_list.php')?>">領収書一覧</a><a href="<?=business_url('receipt_system/receipt_create.php')?>">領収書作成</a><a href="<?=business_url('menu.php')?>">メニューへ戻る</a><a href="<?=business_url('logout.php')?>">ログアウト</a></nav></div></div>

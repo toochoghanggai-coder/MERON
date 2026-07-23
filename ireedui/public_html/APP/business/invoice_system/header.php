@@ -1,0 +1,2 @@
+<?php require_once __DIR__ . '/auth.php'; require_login(); ?>
+<div class="topbar no-print"><div class="topbar__inner"><div><strong>請求書管理</strong></div><nav><a href="<?=business_url('invoice_system/invoice_list.php')?>">請求書一覧</a><a href="<?=business_url('invoice_system/invoice_create.php')?>">請求書作成</a><a href="<?=business_url('invoice_system/customer_list.php')?>">請求先一覧</a><a href="<?=business_url('menu.php')?>">メニューへ戻る</a><a href="<?=business_url('logout.php')?>">ログアウト</a></nav></div></div>

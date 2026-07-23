@@ -1,0 +1,323 @@
+*{box-sizing:border-box}
+html{font-size:16px}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Yu Gothic",Meiryo,sans-serif;background:#f4f6f8;color:#111;font-size:16px;line-height:1.45}
+.container{max-width:1180px;margin:0 auto;padding:18px}.topbar{background:#1f2937;color:#fff;padding:12px 18px}.topbar__inner{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px}.topbar a{color:#fff;text-decoration:none;margin-left:14px;white-space:nowrap}.card{background:#fff;border:1px solid #ddd;border-radius:12px;padding:16px;margin:14px 0;box-shadow:0 2px 8px rgba(0,0,0,.04)}h1{font-size:24px;margin:8px 0 16px}h2{font-size:18px;margin:4px 0 12px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}label{display:block;font-weight:700;margin-bottom:5px}input,select,textarea{width:100%;padding:12px;border:1px solid #bbb;border-radius:8px;font-size:16px;background:#fff}input.small-date{max-width:180px}textarea{min-height:74px}.btns{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}.btn{border:0;border-radius:8px;padding:11px 16px;font-size:16px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;text-align:center}.btn.primary{background:#2563eb;color:#fff}.btn.gray{background:#e5e7eb;color:#111}.btn.green{background:#16a34a;color:#fff}.btn.red{background:#dc2626;color:#fff}.msg{padding:10px;border-radius:8px;margin:10px 0}.msg.ok{background:#dcfce7;color:#166534}.msg.err{background:#fee2e2;color:#991b1b}.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}table.list{width:100%;border-collapse:collapse;background:#fff;min-width:740px}table.list th,table.list td{border:1px solid #ddd;padding:8px;text-align:left;vertical-align:middle}table.list th{background:#f3f4f6}.pagination a,.pagination span{display:inline-block;padding:8px 11px;margin:4px;border:1px solid #ccc;border-radius:6px;text-decoration:none;color:#111}.pagination .current{background:#2563eb;color:#fff}.login-box{max-width:420px;margin:80px auto}.form-row{margin-bottom:12px}.mobile-note{color:#555;font-size:14px}
+/* 請求書レイアウト */
+.print-card{background:transparent;border:0;box-shadow:none;padding:0}.invoice-sheet{width:794px;min-height:1123px;background:#fff;margin:12px auto;padding:62px 68px;color:#111;font-family:"Yu Gothic","Meiryo",sans-serif;box-shadow:0 0 0 1px #ddd;overflow:hidden}.invoice-title{text-align:center;font-size:20px;font-weight:700;margin-bottom:20px}.invoice-head{display:grid;grid-template-columns:1fr 1fr;gap:20px}.right-info{position:relative;padding-right:96px}.stamp{position:absolute;right:0;top:46px;width:88px;height:88px;object-fit:contain;background:transparent;z-index:1}.amount-box{margin-top:8px;margin-left:auto;width:250px;border:3px solid #111;text-align:center;font-weight:700;background:#fff}.amount-box span{display:block;padding:4px}.amount-box div{border-top:2px solid #111;padding:8px}.invoice-table{width:100%;border-collapse:collapse;margin-top:22px;font-size:14px}.invoice-table th,.invoice-table td{border:1.5px solid #222;padding:5px;height:28px}.invoice-table th{text-align:center}.invoice-table td.num{text-align:right}.invoice-table .thick-top td{border-top:3px solid #111}
+@media(max-width:760px){
+  html{font-size:16px}body{background:#eef2f7}.container{padding:10px;max-width:100%;overflow-x:hidden}.card{padding:12px;border-radius:10px;margin:10px 0}h1{font-size:21px;margin:8px 0 12px}h2{font-size:17px}.grid,.grid2{grid-template-columns:1fr;gap:10px}input,select,textarea{font-size:17px;padding:13px;min-height:46px}input.small-date{max-width:170px}.btns{display:grid;grid-template-columns:1fr;gap:8px}.btn{width:100%;padding:12px 14px}.topbar{padding:10px 12px}.topbar__inner{display:block}.topbar nav{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}.topbar a{display:block;margin:0;padding:9px 8px;background:rgba(255,255,255,.12);border-radius:6px;text-align:center}.table-wrap{width:100%;overflow-x:auto}table.list{min-width:680px;font-size:14px}table.list th,table.list td{padding:7px}.login-box{margin:28px 10px}
+  /* 明細入力テーブルはスマホではカード型にする */
+  #itemsTable{min-width:0;border-collapse:separate;border-spacing:0 10px;background:transparent}
+  #itemsTable tbody,#itemsTable tr,#itemsTable td{display:block;width:100%}
+  #itemsTable tr:first-child{display:none}
+  #itemsTable tr{border:1px solid #ddd;border-radius:10px;background:#fff;padding:10px;margin-bottom:10px}
+  #itemsTable td{border:0!important;padding:5px 0}
+  #itemsTable td::before{display:block;font-weight:700;margin-bottom:4px;color:#374151;font-size:13px}
+  #itemsTable td:nth-child(1)::before{content:'日付'}#itemsTable td:nth-child(2)::before{content:'種別'}#itemsTable td:nth-child(3)::before{content:'商品名'}#itemsTable td:nth-child(4)::before{content:'グレード'}#itemsTable td:nth-child(5)::before{content:'数量(本)'}#itemsTable td:nth-child(6)::before{content:'単価'}#itemsTable td:nth-child(7)::before{content:'金額'}
+  /* スマホ表示用の請求書プレビュー。印刷時は下のprint設定を使う */
+  .print-card{overflow-x:hidden}.invoice-sheet{width:100%;min-width:0;min-height:auto;margin:10px 0;padding:16px 12px;box-shadow:0 0 0 1px #ddd;font-size:10.5px}.invoice-title{font-size:16px;margin-bottom:12px}.invoice-head{grid-template-columns:1fr 1fr;gap:10px}.right-info{padding-right:64px}.stamp{top:36px;right:0;width:58px;height:58px}.amount-box{width:150px;border-width:2px;font-size:11px}.amount-box span{padding:2px}.amount-box div{padding:4px;border-top-width:1px}.invoice-table{font-size:9.5px;margin-top:12px}.invoice-table th,.invoice-table td{padding:2px;height:20px;border-width:1px}.invoice-table .thick-top td{border-top-width:2px}
+}
+@page{size:A4;margin:0}
+@media print{
+  html,body{width:210mm;height:297mm;margin:0!important;padding:0!important;background:#fff;overflow:hidden}body *{visibility:hidden}.print-card,.print-card *{visibility:visible}.topbar,.no-print,.card:not(.print-card),h1{display:none!important}.container{padding:0!important;margin:0!important;max-width:none!important;width:210mm!important;height:297mm!important}.print-card{position:absolute;left:0;top:0;width:210mm!important;height:297mm!important;border:0!important;box-shadow:none!important;margin:0!important;padding:0!important;overflow:hidden!important;background:#fff!important;page-break-after:avoid;break-after:avoid}.invoice-sheet{position:absolute;left:0;top:0;width:210mm!important;height:297mm!important;min-height:0!important;margin:0!important;padding:13mm 16mm!important;box-shadow:none!important;overflow:hidden!important;page-break-after:avoid;break-after:avoid;font-size:11px}.invoice-title{font-size:16px;margin-bottom:10px}.invoice-head{grid-template-columns:1fr 1fr;gap:14px}.right-info{padding-right:25mm}.stamp{position:absolute;right:0;top:18mm;width:22mm;height:22mm}.amount-box{width:62mm;margin-top:3mm}.amount-box span{padding:1mm}.amount-box div{padding:2mm}.invoice-table{font-size:10.5px;margin-top:7mm}.invoice-table th,.invoice-table td{padding:1.2mm;height:6mm;border-width:.35mm}.invoice-table .thick-top td{border-top-width:.7mm}
+}
+
+
+/* ===== v5 mobile/input refinements ===== */
+:root{--control-h:38px;--control-py:7px;--control-px:10px}
+input,select,textarea{min-height:var(--control-h);padding:var(--control-py) var(--control-px)}
+.search-card .grid{grid-template-columns:repeat(5,minmax(0,1fr));align-items:end}
+.search-card input,.search-card select{height:38px;padding:6px 9px;font-size:15px}
+.action-cell{white-space:nowrap;display:flex;gap:6px;align-items:center}.btn.compact{padding:6px 9px;font-size:13px;border-radius:6px;line-height:1.1;width:auto;min-width:0}
+.form-compact .grid{grid-template-columns:1.1fr .7fr 1.2fr;align-items:end}.form-compact input,.form-compact select{height:38px;padding:6px 9px;font-size:15px}.form-compact .small-date{max-width:145px}.items-actions{justify-content:flex-start;margin-top:10px}.items-actions .btn{width:auto}
+#itemsTable input,#itemsTable select{height:36px;min-height:36px;padding:5px 7px;font-size:14px}#itemsTable th,#itemsTable td{padding:5px}#itemsTable .btn.red{padding:6px 8px;font-size:13px;width:auto}
+@media(max-width:760px){
+  :root{--control-h:36px;--control-py:5px;--control-px:8px}
+  .search-card .grid{grid-template-columns:1fr 1fr;gap:8px}.search-card .grid>div{min-width:0}.search-card input,.search-card select{width:100%;height:34px;min-height:34px;padding:4px 7px;font-size:14px;border-radius:6px}.search-card label{font-size:13px;margin-bottom:3px}.search-card .btns{grid-template-columns:1fr;margin-top:8px}.search-card .btn{padding:9px 10px;font-size:14px}
+  table.list.invoice-list{min-width:520px;font-size:12px}table.list.invoice-list th,table.list.invoice-list td{padding:4px 3px}.invoice-list .col-type{width:82px}.invoice-list .col-date{width:82px}.invoice-list .col-amount{width:82px}.invoice-list .col-action{width:92px}.invoice-list .action-cell{gap:3px}.invoice-list .btn.compact{padding:5px 5px;font-size:11px;border-radius:5px;min-width:36px;text-align:center}
+  .form-compact .grid{grid-template-columns:1fr;gap:8px}.form-compact label{font-size:13px;margin-bottom:3px}.form-compact input,.form-compact select{height:36px;min-height:36px;padding:5px 8px;font-size:14px;border-radius:6px}.form-compact .small-date{max-width:150px}.form-compact .btns{grid-template-columns:1fr 1fr;margin:8px 0}.form-compact .btn{padding:9px 10px;font-size:14px}
+  /* 明細入力はスマホでも1行＝1カード。高さを詰める */
+  #itemsTable tr{padding:8px;margin-bottom:8px}#itemsTable td{padding:3px 0}#itemsTable td::before{font-size:12px;margin-bottom:2px}#itemsTable input,#itemsTable select{height:34px;min-height:34px;padding:4px 7px;font-size:14px;border-radius:6px}#itemsTable .btn.red{padding:7px 10px;font-size:12px;width:auto}.items-actions{display:flex!important}.items-actions .btn{width:auto;padding:9px 12px;font-size:14px}
+}
+
+/* ===== v6 iPhone/search/customer-list refinements ===== */
+.search-card .search-grid{grid-template-columns:1.25fr 1fr 1fr 1fr 1fr;align-items:end}
+.search-card .search-grid>div{min-width:0}
+.search-card input[type="date"],.form-compact input[type="date"]{-webkit-appearance:none;appearance:none;line-height:1.2;min-width:0}
+.customer-register-card{padding:0;overflow:hidden}.section-toggle{width:100%;border:0;background:#fff;text-align:left;font-size:18px;font-weight:700;padding:14px 16px;cursor:pointer}.section-toggle::after{content:'＋';float:right}.customer-register-body{display:none;border-top:1px solid #e5e7eb;padding:16px}.customer-register-body.is-open{display:block}.customer-register-body.is-open + .section-toggle::after{content:'−'}
+.customers-list .btn.compact{padding:6px 9px;font-size:13px;border-radius:6px;line-height:1.1;width:auto;min-width:0}
+@media(max-width:760px){
+  .search-card .search-grid{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:7px 8px;align-items:end}
+  .search-card .search-customer{grid-column:1 / -1;grid-row:1}.search-card .search-date-from{grid-column:1;grid-row:2}.search-card .search-date-to{grid-column:2;grid-row:2}.search-card .search-amount-from{grid-column:1;grid-row:3}.search-card .search-amount-to{grid-column:2;grid-row:3}
+  .search-card .search-grid input{width:100%;max-width:100%;height:34px!important;min-height:34px!important;padding:4px 6px!important;font-size:13px!important;line-height:1.2!important;min-width:0!important}
+  .search-card .search-grid input[type="date"]{font-size:12px!important;padding-left:4px!important;padding-right:2px!important}
+  .search-card .search-grid label{font-size:12px;line-height:1.1;white-space:nowrap}
+  .form-compact input[type="date"],.form-compact .small-date{width:100%;max-width:100%;height:36px!important;min-height:36px!important;padding:5px 8px!important;font-size:14px!important;line-height:1.2!important}
+  .customer-register-card .section-toggle{font-size:16px;padding:12px}.customer-register-body{padding:12px}.customers-list{min-width:520px;font-size:12px}.customers-list th,.customers-list td{padding:4px 3px!important}.customers-list .btn.compact{padding:5px 5px;font-size:11px;border-radius:5px;min-width:36px;text-align:center}
+}
+
+/* ===== v7 document type search / attached invoice layout ===== */
+.search-card .search-grid{grid-template-columns:.9fr 1.3fr 1fr 1fr 1fr 1fr;align-items:end}
+
+.invoice{
+  --text:#172238;--muted:#6c7688;--line:#cfd7e3;--header-bg:#f3f6fa;--accent:#58729b;--panel-bg:#f7f9fc;
+  width:210mm;min-height:297mm;margin:12px auto;padding:16mm 14mm 12mm;background:#fff;color:var(--text);
+  font-family:"Noto Sans JP","Yu Gothic","Meiryo",sans-serif;font-size:14px;line-height:1.6;box-shadow:0 0 0 1px #ddd;
+}
+.invoice .title{margin:0;text-align:center;font-size:26px;font-weight:700;letter-spacing:.25em}
+.invoice .top-line{margin:18px 0 24px;border:0;border-top:3px solid var(--text)}
+.invoice .top-row{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+.invoice .date-text{text-align:right;font-size:15px;margin-bottom:28px;white-space:nowrap}
+.invoice .customer-address,.invoice .company-info,.invoice .contact{font-size:14px}
+.invoice .customer-name{margin:34px 0 18px;padding-bottom:10px;border-bottom:1px solid var(--line);font-size:24px;font-weight:600}
+.invoice .company-area{display:grid;grid-template-columns:max-content 78px;gap:8px;align-items:start;justify-content:end}
+.invoice .company-name{margin-bottom:10px;font-size:17px;font-weight:700}
+.invoice .stamp-img{width:78px;height:78px;margin-top:8px;object-fit:contain;background:transparent;position:static;z-index:auto}
+.invoice .lead{margin:36px 0 20px;font-size:15px}
+.invoice .amount-box-new{width:360px;height:64px;margin-bottom:30px;padding:0 22px;border-radius:7px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:space-between}
+.invoice .amount-label{font-size:15px;font-weight:700}
+.invoice .amount-value{font-size:28px;font-weight:500;letter-spacing:.05em}
+.invoice table{width:100%;border-collapse:collapse}
+.invoice .detail-table{margin-top:4px;font-size:13px}
+.invoice .detail-table th{background:var(--header-bg);font-weight:700;text-align:center;border:1px solid var(--line);border-bottom:2px solid var(--text);padding:8px 6px}
+.invoice .detail-table td{border:1px solid var(--line);padding:8px 6px;vertical-align:middle}
+.invoice .detail-table .date,.invoice .detail-table .type,.invoice .detail-table .note{text-align:center}
+.invoice .detail-table .qty,.invoice .detail-table .price,.invoice .detail-table .amount{text-align:right}
+.invoice .summary-wrap{display:flex;justify-content:flex-end;align-items:flex-start;gap:16px;margin-top:16px}
+.invoice .total-count-box{width:160px;font-size:14px}
+.invoice .total-count-box th,.invoice .total-count-box td{border:1px solid var(--line);padding:7px 9px}
+.invoice .total-count-box th{text-align:left;font-weight:700;white-space:nowrap}
+.invoice .total-count-box td{text-align:right;white-space:nowrap}
+.invoice .summary-table{width:340px;font-size:14px}
+.invoice .summary-table th,.invoice .summary-table td{border:1px solid var(--line);padding:7px 9px}
+.invoice .summary-table th{width:50%;text-align:left;font-weight:700}
+.invoice .summary-table td{text-align:right}
+.invoice .summary-table .grand th,.invoice .summary-table .grand td{background:var(--accent);color:#fff;font-size:16px;font-weight:700}
+.invoice .bank-box{margin:64px auto 0;padding:22px 26px;width:calc(100% - 28px);min-height:108px;border-radius:8px;background:var(--panel-bg);display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;font-size:13px}
+.invoice .bank-title{margin-bottom:10px;font-weight:700;font-size:15px}
+.invoice .bank-note{color:var(--muted);white-space:nowrap}
+.invoice .footer{margin-top:42px;padding-top:16px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:12px}
+.items-actions{display:flex!important;flex-direction:row!important;align-items:center;gap:10px}.items-actions .btn{width:auto!important;min-width:110px}
+@media(max-width:760px){
+  .search-card .search-grid{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:7px 8px;align-items:end}
+  .search-card .search-doc-type{grid-column:1 / -1;grid-row:1}.search-card .search-customer{grid-column:1 / -1;grid-row:2}.search-card .search-date-from{grid-column:1;grid-row:3}.search-card .search-date-to{grid-column:2;grid-row:3}.search-card .search-amount-from{grid-column:1;grid-row:4}.search-card .search-amount-to{grid-column:2;grid-row:4}
+  .items-actions{display:flex!important;flex-direction:row!important;gap:8px}.items-actions .btn{width:auto!important;min-width:96px;padding:9px 12px;font-size:14px}
+  .print-card{overflow-x:auto!important;-webkit-overflow-scrolling:touch}.invoice{width:794px;min-height:auto;margin:10px 0;padding:50px 44px 38px;box-shadow:0 0 0 1px #ddd;font-size:13px}.invoice .title{font-size:24px}.invoice .amount-box-new{width:330px}.invoice .bank-box{margin-top:48px}.invoice .stamp-img{width:72px;height:72px}
+}
+@media print{
+  .invoice{position:absolute;left:0;top:0;width:210mm!important;height:297mm!important;min-height:0!important;margin:0!important;padding:16mm 14mm 12mm!important;box-shadow:none!important;overflow:hidden!important;page-break-after:avoid;break-after:avoid;font-size:12px!important;background:#fff!important;color:#172238!important}
+  .invoice .title{font-size:24px!important;margin:0!important}.invoice .top-line{margin:14px 0 18px!important}.invoice .top-row{grid-template-columns:1fr 1fr!important;gap:22px!important}.invoice .customer-name{font-size:22px!important;margin:26px 0 14px!important}.invoice .lead{margin:28px 0 16px!important}.invoice .amount-box-new{width:340px!important;height:58px!important;margin-bottom:22px!important}.invoice .amount-value{font-size:26px!important}.invoice .detail-table{font-size:12px!important}.invoice .detail-table th,.invoice .detail-table td{padding:6px 5px!important}.invoice .summary-wrap{margin-top:14px!important}.invoice .bank-box{margin-top:42px!important;min-height:94px!important;padding:18px 22px!important}.invoice .footer{margin-top:32px!important}.invoice .stamp-img{width:76px!important;height:76px!important}
+}
+
+
+/* ===== v8 smartphone scaled invoice preview / customer sorting version ===== */
+@media screen and (max-width:760px){
+  .print-card{
+    position:relative!important;
+    overflow:hidden!important;
+    padding:8px 0!important;
+    background:transparent!important;
+  }
+  .print-card .invoice{
+    width:210mm!important;
+    min-height:297mm!important;
+    margin:0!important;
+    padding:16mm 14mm 12mm!important;
+    transform-origin:top center!important;
+    position:relative!important;
+    left:50%!important;
+    box-shadow:0 0 0 1px #ddd!important;
+    font-size:14px!important;
+  }
+  .print-card .invoice .title{font-size:26px!important}
+  .print-card .invoice .amount-box-new{width:360px!important;height:64px!important}
+  .print-card .invoice .bank-box{margin-top:64px!important}
+  .print-card .invoice .stamp-img{width:78px!important;height:78px!important}
+}
+@media screen and (min-width:481px) and (max-width:760px){
+  .print-card{height:780px!important}
+  .print-card .invoice{transform:translateX(-50%) scale(.68)!important}
+}
+@media screen and (max-width:480px){
+  .print-card{height:510px!important}
+  .print-card .invoice{transform:translateX(-50%) scale(.44)!important}
+}
+@media screen and (max-width:380px){
+  .print-card{height:490px!important}
+  .print-card .invoice{transform:translateX(-50%) scale(.42)!important}
+}
+
+/* ===== v12 grade dropdown / simplified item type ===== */
+.detail-heading{font-size:18px;margin:14px 0 8px}
+#itemsTable .disabled-input{background:#f3f4f6;color:#777}
+@media(min-width:761px){#itemsTable{min-width:900px}}
+
+/* ===== v10 main menu / compact top navigation ===== */
+.menu-card{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+.menu-tile{
+  display:block;
+  padding:22px 18px;
+  border:1px solid #d1d5db;
+  border-radius:12px;
+  background:#fff;
+  color:#111;
+  text-decoration:none;
+  box-shadow:0 2px 8px rgba(0,0,0,.04);
+}
+.menu-tile__title{
+  display:block;
+  font-size:20px;
+  font-weight:700;
+  margin-bottom:6px;
+}
+.menu-tile__desc{
+  display:block;
+  color:#6b7280;
+  font-size:14px;
+}
+@media(max-width:760px){
+  .topbar nav{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:5px!important;
+    margin-top:8px!important;
+  }
+  .topbar a{
+    display:block!important;
+    margin:0!important;
+    padding:6px 4px!important;
+    font-size:12px!important;
+    line-height:1.15!important;
+    border-radius:5px!important;
+    text-align:center!important;
+    white-space:nowrap!important;
+  }
+  .menu-card{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+  .menu-tile{
+    padding:16px 14px;
+  }
+  .menu-tile__title{
+    font-size:18px;
+  }
+}
+
+/* ===== v12 grade dropdown / simplified item type ===== */
+#itemsTable select[name="rank_name[]"]{min-width:86px}
+
+
+/* ===== v13 invoice detail full display / no blank final print page ===== */
+.invoice .detail-table th,
+.invoice .detail-table td{
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+.invoice .detail-table tr,
+.invoice .summary-wrap,
+.invoice .bank-box,
+.invoice .footer{
+  break-inside:avoid;
+  page-break-inside:avoid;
+}
+
+@media screen and (max-width:760px){
+  /* 縮小プレビューの下部が切れないよう、固定高さ＋隠す指定を解除 */
+  .print-card{
+    height:auto!important;
+    min-height:0!important;
+    overflow:visible!important;
+    padding-bottom:18px!important;
+  }
+  .print-card .invoice{
+    height:auto!important;
+    min-height:297mm!important;
+    overflow:visible!important;
+  }
+}
+@media screen and (min-width:481px) and (max-width:760px){
+  .print-card{min-height:780px!important}
+}
+@media screen and (max-width:480px){
+  .print-card{min-height:530px!important}
+}
+@media screen and (max-width:380px){
+  .print-card{min-height:510px!important}
+}
+
+@media print{
+  @page{size:A4;margin:0}
+  html,body{
+    width:210mm!important;
+    height:auto!important;
+    min-height:0!important;
+    margin:0!important;
+    padding:0!important;
+    background:#fff!important;
+    overflow:visible!important;
+  }
+  .container{
+    width:210mm!important;
+    height:auto!important;
+    min-height:0!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:visible!important;
+  }
+  .print-card{
+    position:static!important;
+    left:auto!important;
+    top:auto!important;
+    width:210mm!important;
+    height:auto!important;
+    min-height:0!important;
+    margin:0!important;
+    padding:0!important;
+    border:0!important;
+    box-shadow:none!important;
+    overflow:visible!important;
+    background:#fff!important;
+    page-break-after:auto!important;
+    break-after:auto!important;
+  }
+  .print-card .invoice,
+  .invoice{
+    position:static!important;
+    left:auto!important;
+    top:auto!important;
+    width:210mm!important;
+    height:auto!important;
+    min-height:0!important;
+    margin:0!important;
+    padding:14mm 14mm 10mm!important;
+    box-shadow:none!important;
+    overflow:visible!important;
+    transform:none!important;
+    page-break-after:auto!important;
+    break-after:auto!important;
+    font-size:12px!important;
+    background:#fff!important;
+    color:#172238!important;
+  }
+  .invoice .detail-table{font-size:11.5px!important}
+  .invoice .detail-table th,
+  .invoice .detail-table td{padding:5px 4px!important}
+  .invoice .bank-box{margin-top:24px!important}
+  .invoice .footer{margin-top:20px!important}
+}
+
+
+/* ===== v14 print title visibility fix ===== */
+@media print{
+  .print-card .invoice .title,
+  .invoice .title{
+    display:block!important;
+    visibility:visible!important;
+  }
+}
