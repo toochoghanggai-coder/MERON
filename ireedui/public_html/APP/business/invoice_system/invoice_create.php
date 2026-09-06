@@ -110,7 +110,8 @@ $invoice = $invoice ?: ['id'=>'', 'document_type'=>'請求明細書', 'invoice_d
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>請求書作成</title>
-  <link rel="stylesheet" href="<?=asset_url('style.css')?>">
+  <!-- v20260906-04: 画面・印刷の配色調整版CSSを確実に再取得させるためキャッシュバージョンを更新 -->
+  <link rel="stylesheet" href="<?=asset_url('style.css')?>&invoice_v=20260906-04">
 </head>
 <body>
 <?php include 'header.php'; ?>

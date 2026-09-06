@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $defaultRate = default_tax_rate($taxRates);
 $receipt = $receipt ?: ['id'=>'','receipt_no'=>generate_receipt_no($pdo), 'customer_name'=>'', 'issue_date'=>date('Y-m-d'), 'description'=>'', 'total_amount'=>'', 'tax_rate'=>$defaultRate, 'subtotal'=>'', 'tax_amount'=>'', 'note'=>''];
 ?>
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>領収書作成</title><link rel="stylesheet" href="<?=asset_url('style.css')?>&receipt_v=20260723-07"><!-- v20260723-07: 領収書画面のCSSキャッシュバージョンを一覧画面と統一 --><link rel="stylesheet" href="<?=asset_url('receipt_layout.css')?>&receipt_v=20260723-07"></head><body><?php include 'header.php'; ?>
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>領収書作成</title><link rel="stylesheet" href="<?=asset_url('style.css')?>&receipt_v=20260906-09"><!-- v20260906-09: 領収書画面のCSSキャッシュバージョンを一覧画面と統一 --><link rel="stylesheet" href="<?=asset_url('receipt_layout.css')?>&receipt_v=20260906-09"></head><body><?php include 'header.php'; ?>
 <div class="container"><h1><?= $id ? '領収書編集' : '領収書作成' ?></h1><?php if ($err): ?><div class="msg err"><?=h($err)?></div><?php endif; ?>
 <form method="post" id="receiptForm" class="card no-print form-compact receipt-form-card"><input type="hidden" name="id" value="<?=h($receipt['id'] ?? '')?>"><div class="grid">
 <div><label>宛先</label><input name="customer_name" value="<?=h($receipt['customer_name'])?>" required></div>

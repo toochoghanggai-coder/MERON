@@ -69,16 +69,18 @@ input,select,textarea{min-height:var(--control-h);padding:var(--control-py) var(
 .invoice .top-row{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
 .invoice .date-text{text-align:right;font-size:15px;margin-bottom:28px;white-space:nowrap}
 .invoice .customer-address,.invoice .company-info,.invoice .contact{font-size:14px}
-.invoice .customer-name{margin:34px 0 18px;padding-bottom:10px;border-bottom:1px solid var(--line);font-size:24px;font-weight:600}
-.invoice .company-area{display:grid;grid-template-columns:max-content 78px;gap:8px;align-items:start;justify-content:end}
+.invoice .customer-name{margin:34px 0 18px;padding-bottom:10px;border-bottom:1px solid #444;font-size:24px;font-weight:600}
+.invoice .company-area{display:grid;grid-template-columns:max-content 104px;gap:10px;align-items:start;justify-content:end}
 .invoice .company-name{margin-bottom:10px;font-size:17px;font-weight:700}
-.invoice .stamp-img{width:78px;height:78px;margin-top:8px;object-fit:contain;background:transparent;position:static;z-index:auto}
+/* v20260905-01: 請求書・見積書の印鑑を約1.33倍にし、専用列も広げて会社情報との重なりを防止する。 */
+.invoice .stamp-img{width:104px;height:104px;margin-top:8px;object-fit:contain;background:transparent;position:static;z-index:auto}
 .invoice .lead{margin:36px 0 20px;font-size:15px}
 .invoice .amount-box-new{width:360px;height:64px;margin-bottom:30px;padding:0 22px;border-radius:7px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:space-between}
 .invoice .amount-label{font-size:15px;font-weight:700}
 .invoice .amount-value{font-size:28px;font-weight:500;letter-spacing:.05em}
 .invoice table{width:100%;border-collapse:collapse}
 .invoice .detail-table{margin-top:4px;font-size:13px}
+/* v20260906-04: 画面上の明細罫線は従来の薄色を使い、印刷時だけ後段で濃色にする。 */
 .invoice .detail-table th{background:var(--header-bg);font-weight:700;text-align:center;border:1px solid var(--line);border-bottom:2px solid var(--text);padding:8px 6px}
 .invoice .detail-table td{border:1px solid var(--line);padding:8px 6px;vertical-align:middle}
 .invoice .detail-table .date,.invoice .detail-table .type,.invoice .detail-table .note{text-align:center}
@@ -96,17 +98,18 @@ input,select,textarea{min-height:var(--control-h);padding:var(--control-py) var(
 .invoice .bank-box{margin:64px auto 0;padding:22px 26px;width:calc(100% - 28px);min-height:108px;border-radius:8px;background:var(--panel-bg);display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;font-size:13px}
 .invoice .bank-title{margin-bottom:10px;font-weight:700;font-size:15px}
 .invoice .bank-note{color:var(--muted);white-space:nowrap}
-.invoice .footer{margin-top:42px;padding-top:16px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:12px}
+/* v20260906-03: 背景色は維持し、請求先・集計表・注記・フッターの薄い線と文字だけを印刷向けに濃くする。 */
+.invoice .footer{margin-top:42px;padding-top:16px;border-top:1px solid #444;text-align:center;color:var(--muted);font-size:12px}
 .items-actions{display:flex!important;flex-direction:row!important;align-items:center;gap:10px}.items-actions .btn{width:auto!important;min-width:110px}
 @media(max-width:760px){
   .search-card .search-grid{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:7px 8px;align-items:end}
   .search-card .search-doc-type{grid-column:1 / -1;grid-row:1}.search-card .search-customer{grid-column:1 / -1;grid-row:2}.search-card .search-date-from{grid-column:1;grid-row:3}.search-card .search-date-to{grid-column:2;grid-row:3}.search-card .search-amount-from{grid-column:1;grid-row:4}.search-card .search-amount-to{grid-column:2;grid-row:4}
   .items-actions{display:flex!important;flex-direction:row!important;gap:8px}.items-actions .btn{width:auto!important;min-width:96px;padding:9px 12px;font-size:14px}
-  .print-card{overflow-x:auto!important;-webkit-overflow-scrolling:touch}.invoice{width:794px;min-height:auto;margin:10px 0;padding:50px 44px 38px;box-shadow:0 0 0 1px #ddd;font-size:13px}.invoice .title{font-size:24px}.invoice .amount-box-new{width:330px}.invoice .bank-box{margin-top:48px}.invoice .stamp-img{width:72px;height:72px}
+  .print-card{overflow-x:auto!important;-webkit-overflow-scrolling:touch}.invoice{width:794px;min-height:auto;margin:10px 0;padding:50px 44px 38px;box-shadow:0 0 0 1px #ddd;font-size:13px}.invoice .title{font-size:24px}.invoice .amount-box-new{width:330px}.invoice .bank-box{margin-top:48px}.invoice .stamp-img{width:104px;height:104px}
 }
 @media print{
   .invoice{position:absolute;left:0;top:0;width:210mm!important;height:297mm!important;min-height:0!important;margin:0!important;padding:16mm 14mm 12mm!important;box-shadow:none!important;overflow:hidden!important;page-break-after:avoid;break-after:avoid;font-size:12px!important;background:#fff!important;color:#172238!important}
-  .invoice .title{font-size:24px!important;margin:0!important}.invoice .top-line{margin:14px 0 18px!important}.invoice .top-row{grid-template-columns:1fr 1fr!important;gap:22px!important}.invoice .customer-name{font-size:22px!important;margin:26px 0 14px!important}.invoice .lead{margin:28px 0 16px!important}.invoice .amount-box-new{width:340px!important;height:58px!important;margin-bottom:22px!important}.invoice .amount-value{font-size:26px!important}.invoice .detail-table{font-size:12px!important}.invoice .detail-table th,.invoice .detail-table td{padding:6px 5px!important}.invoice .summary-wrap{margin-top:14px!important}.invoice .bank-box{margin-top:42px!important;min-height:94px!important;padding:18px 22px!important}.invoice .footer{margin-top:32px!important}.invoice .stamp-img{width:76px!important;height:76px!important}
+  .invoice .title{font-size:24px!important;margin:0!important}.invoice .top-line{margin:14px 0 18px!important}.invoice .top-row{grid-template-columns:1fr 1fr!important;gap:22px!important}.invoice .customer-name{font-size:22px!important;margin:26px 0 14px!important}.invoice .lead{margin:28px 0 16px!important}.invoice .amount-box-new{width:340px!important;height:58px!important;margin-bottom:22px!important}.invoice .amount-value{font-size:26px!important}.invoice .detail-table{font-size:12px!important}.invoice .detail-table th,.invoice .detail-table td{padding:6px 5px!important}.invoice .summary-wrap{margin-top:14px!important}.invoice .bank-box{margin-top:42px!important;min-height:94px!important;padding:18px 22px!important}.invoice .footer{margin-top:32px!important}.invoice .stamp-img{width:101px!important;height:101px!important}
 }
 
 
@@ -132,7 +135,7 @@ input,select,textarea{min-height:var(--control-h);padding:var(--control-py) var(
   .print-card .invoice .title{font-size:26px!important}
   .print-card .invoice .amount-box-new{width:360px!important;height:64px!important}
   .print-card .invoice .bank-box{margin-top:64px!important}
-  .print-card .invoice .stamp-img{width:78px!important;height:78px!important}
+  .print-card .invoice .stamp-img{width:104px!important;height:104px!important}
 }
 @media screen and (min-width:481px) and (max-width:760px){
   .print-card{height:780px!important}
@@ -307,7 +310,17 @@ input,select,textarea{min-height:var(--control-h);padding:var(--control-py) var(
   }
   .invoice .detail-table{font-size:11.5px!important}
   .invoice .detail-table th,
-  .invoice .detail-table td{padding:5px 4px!important}
+  .invoice .detail-table td{padding:5px 4px!important;border-color:#222!important}
+  .invoice .total-count-box th,
+  .invoice .total-count-box td,
+  .invoice .summary-table th,
+  .invoice .summary-table td{border-color:#222!important}
+  .invoice .bank-note,
+  .invoice .footer{color:#444!important}
+  /* v20260906-04: 印刷時の2か所の合計金額は背景を使わず、文字を黒で明瞭に表示する。 */
+  .invoice .amount-box-new,
+  .invoice .summary-table .grand th,
+  .invoice .summary-table .grand td{background:#fff!important;color:#000!important}
   .invoice .bank-box{margin-top:24px!important}
   .invoice .footer{margin-top:20px!important}
 }
