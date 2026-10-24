@@ -9,15 +9,12 @@ function typeOptions(selected){
   const values=['商品','その他'];
   return values.map(v=>`<option value="${v}" ${v===selected?'selected':''}>${v}</option>`).join('');
 }
-function gradeOptions(selected){
-  const values=['','NEW','A','B','5mm','7mm','9mm','11mm','13mm','15mm'];
-  return values.map(v=>`<option value="${v}" ${v===selected?'selected':''}>${v}</option>`).join('');
-}
 function addRow(){
   const t=document.getElementById('itemsTable');
   if(!t) return;
   const tr=t.insertRow(-1);
-  tr.innerHTML=`<td><input name="item_date[]" value="${defaultItemDate()}"></td><td><select name="type[]">${typeOptions('商品')}</select></td><td><input name="product_name[]"></td><td><select name="rank_name[]">${gradeOptions('')}</select></td><td><input type="number" name="quantity[]" oninput="calcRow(this)"></td><td><input type="number" name="unit_price[]" oninput="calcRow(this)"></td><td><input type="number" name="amount_view[]" oninput="calcTotalsOnly()"></td><td><button type="button" class="btn red" onclick="this.closest('tr').remove()">削除</button></td>`;
+  // v20261022-05: 追加行でも候補選択と自由入力の両方を利用できるようにする。
+  tr.innerHTML=`<td><input name="item_date[]" value="${defaultItemDate()}"></td><td><select name="type[]">${typeOptions('商品')}</select></td><td><input name="product_name[]"></td><td><input name="rank_name[]" list="gradeOptions" autocomplete="off"></td><td><input type="number" name="quantity[]" oninput="calcRow(this)"></td><td><input type="number" name="unit_price[]" oninput="calcRow(this)"></td><td><input type="number" name="amount_view[]" oninput="calcTotalsOnly()"></td><td><button type="button" class="btn red" onclick="this.closest('tr').remove()">削除</button></td>`;
 }
 function calcRow(el){
   const tr=el.closest('tr');

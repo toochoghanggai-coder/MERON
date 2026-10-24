@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $productName = trim((string)($names[$i] ?? ''));
             $rankName = trim((string)($ranks[$i] ?? ''));
-            if ($rankName !== '' && !in_array($rankName, $gradeOptions, true)) $rankName = '';
+            // v20261022-05: 候補外のグレードも手入力値として保存する。
 
             $q = (int)($qtys[$i] ?? 0);
             $price = (int)($prices[$i] ?? 0);
@@ -110,8 +110,8 @@ $invoice = $invoice ?: ['id'=>'', 'document_type'=>'請求明細書', 'invoice_d
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>請求書作成</title>
-  <!-- v20260906-04: 画面・印刷の配色調整版CSSを確実に再取得させるためキャッシュバージョンを更新 -->
-  <link rel="stylesheet" href="<?=asset_url('style.css')?>&invoice_v=20260906-04">
+  <!-- v20261022-05: グレード自由入力対応版のキャッシュバージョンへ更新 -->
+  <link rel="stylesheet" href="<?=asset_url('style.css')?>&invoice_v=20261022-05">
 </head>
 <body>
 <?php include 'header.php'; ?>
@@ -144,6 +144,12 @@ $invoice = $invoice ?: ['id'=>'', 'document_type'=>'請求明細書', 'invoice_d
     </div>
 
     <h2 class="detail-heading">明細</h2>
+    <!-- v20261022-05: 既存候補を残しながらグレードを自由入力できるようにする。 -->
+    <datalist id="gradeOptions">
+      <?php foreach ($gradeOptions as $grade): ?>
+        <option value="<?=h($grade)?>"></option>
+      <?php endforeach; ?>
+    </datalist>
     <div class="table-wrap">
       <table class="list" id="itemsTable">
         <tr>
@@ -170,14 +176,7 @@ $invoice = $invoice ?: ['id'=>'', 'document_type'=>'請求明細書', 'invoice_d
             </select>
           </td>
           <td><input name="product_name[]" value="<?=h($it['product_name'] ?? '')?>"></td>
-          <td>
-            <select name="rank_name[]">
-              <option value=""></option>
-              <?php foreach ($gradeOptions as $grade): ?>
-                <option value="<?=h($grade)?>" <?=$rowGrade === $grade ? 'selected' : ''?>><?=h($grade)?></option>
-              <?php endforeach; ?>
-            </select>
-          </td>
+          <td><input name="rank_name[]" list="gradeOptions" value="<?=h($rowGrade)?>" autocomplete="off"></td>
           <td><input type="number" name="quantity[]" value="<?=h($it['quantity'] ?? '')?>" oninput="calcRow(this)"></td>
           <td><input type="number" name="unit_price[]" value="<?=h($it['unit_price'] ?? '')?>" oninput="calcRow(this)"></td>
           <td><input type="number" name="amount_view[]" value="<?=h($it['amount'] ?? '')?>" oninput="calcTotalsOnly()"></td>
@@ -193,6 +192,6 @@ $invoice = $invoice ?: ['id'=>'', 'document_type'=>'請求明細書', 'invoice_d
   </form>
   <div class="card print-card"><p class="mobile-note no-print">登録後、請求書一覧の表示から正式レイアウトを確認できます。</p></div>
 </div>
-<script src="<?=asset_url('app.js')?>"></script>
+<script src="<?=asset_url('app.js')?>&invoice_v=20261022-05"></script>
 </body>
 </html>
